@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const queSchema = new Schema({
-  testId: { type: mongoose.Schema.Types.ObjectId, required: true },
+  // testId: { type: mongoose.Schema.Types.ObjectId, required: true },
   question: {
     type: String,
     required: true
@@ -14,4 +14,5 @@ const queSchema = new Schema({
 
 const Question = mongoose.model("question", queSchema);
 
+module.exports = queSchema;
 module.exports = Question;

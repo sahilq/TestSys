@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
+import * as actions from "../actions/actionCreators";
+
 class TestInit extends Component {
   state = { testName: "", description: "" };
 
@@ -10,7 +12,13 @@ class TestInit extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    console.log(this.state);
+    const data = {
+      userId: this.props.userId,
+      testName: this.state.testName,
+      description: this.state.description,
+      questions: []
+    };
+    this.props.testInit(data);
     this.setState({ testName: "", description: "" });
   };
 
@@ -56,11 +64,17 @@ class TestInit extends Component {
   }
 }
 function mapstateToProps(state) {
-  return {};
+  return {
+    userId: state.auth.userId,
+    testActive: state.test.testActive,
+    testId: state.test.testId
+  };
 }
 
 function mapDispatchToProps(dispatch) {
-  return {};
+  return {
+    testInit: data => dispatch(actions.testInit(data))
+  };
 }
 export default connect(
   mapstateToProps,

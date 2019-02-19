@@ -29,6 +29,9 @@ if (user) {
 //set headers
 axios.defaults.headers.common["Authorization"] = jwtToken;
 
+//fetching test info
+let testId = localStorage.getItem("TEST_ID");
+
 //init store with session details
 const store = createStore(
   reducer,
@@ -39,6 +42,10 @@ const store = createStore(
       userId: user ? user[7] : "",
       role: user ? user[15] : "",
       isAuthenticated: jwtToken ? true : false
+    },
+    test: {
+      testId: testId,
+      testActive: testId ? true : false
     }
   },
   composeEnhancer(applyMiddleware(sagaMiddleware))

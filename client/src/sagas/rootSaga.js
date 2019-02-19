@@ -1,6 +1,7 @@
 import { fork, takeLatest, all } from "redux-saga/effects";
 
 import * as auth from "./authSaga";
+import * as test from "./testSaga";
 import * as types from "../actions/types";
 
 //Authentication Watcher Saga
@@ -11,9 +12,12 @@ function* authSaga() {
     yield takeLatest(types.SIGN_OUT_REQ, auth.signOut)
   ]);
 }
-//Post and Comments watcher saga
+//test watcher
+function* testSaga() {
+  yield all([yield takeLatest(types.TEST_INIT_REQ, test.testInitSaga)]);
+}
 
 //Root SAGA
 export default function* mySaga() {
-  yield all([yield fork(authSaga)]);
+  yield all([yield fork(authSaga), yield fork(testSaga)]);
 }

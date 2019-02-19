@@ -45,3 +45,24 @@ export function* authError() {
     payload: "Authentication Failed...."
   });
 }
+
+//TEST INIT REQ
+export const testInit = payload => ({
+  type: types.TEST_INIT_REQ,
+  payload
+});
+
+//TEST DEACTIVATE
+export const deactTest = () => ({
+  type: types.DEACTIVATE_TEST
+});
+
+//TEST INIT SUCCESS
+export function* testInitSuccess(data) {
+  let payload = { testActive: true, testId: data._id };
+  yield put({ type: types.TEST_INIT_SUCCESS, payload });
+}
+//TEST DEACT
+export function* testDeact() {
+  yield put(types.DEACTIVATE_TEST_SUCCESS);
+}

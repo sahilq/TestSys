@@ -11,6 +11,7 @@ db.on("error", console.error.bind(console, "error connection"));
 db.once("open", () => {
   console.log("DB CONNECTED");
 });
+
 const app = express(); //init express as app
 //Middlewares
 app.use(cors());
@@ -22,6 +23,7 @@ app.use(express.json()); //body parser
 
 //Handling Routes
 app.use("/user", require("./api/routes/users"));
+app.use("/test", require("./api/routes/test"));
 
 //setting port
 const port = process.env.PORT || 5000;

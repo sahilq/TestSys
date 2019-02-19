@@ -12,11 +12,13 @@ import App from "./components/App";
 import SignIn from "./components/SignIn";
 import SignUp from "./components/SignUp";
 import TestInit from "./components/TestInit";
+import TestInfo from "./components/TestInfo";
 import * as serviceWorker from "./serviceWorker";
 //HOCs
 // import authGuard from "./components/HOCs/authGuard";
 import signOnGuard from "./components/HOC/signOnGuard";
 import dashGuard from "./components/HOC/dashGuard";
+import testInitHOC from "./components/HOC/testInitHOC";
 
 //fetch token and user details from localstorage
 const jwtToken = localStorage.getItem("JWT_TOKEN");
@@ -28,9 +30,10 @@ ReactDOM.render(
     <BrowserRouter>
       <App>
         {/* Send components to App.js as children props to be rendered */}
-        <Route exact path="/dashboard" component={dashGuard(TestInit)} />
+        <Route exact path="/dashboard" component={testInitHOC(TestInit)} />
         <Route exact path="/signup" component={signOnGuard(SignUp)} />
         <Route exact path="/signin" component={signOnGuard(SignIn)} />
+        <Route exact path="/testInfo" component={dashGuard(TestInfo)} />
       </App>
     </BrowserRouter>
   </Provider>,
