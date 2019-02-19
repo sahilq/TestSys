@@ -13,6 +13,7 @@ import SignIn from "./components/SignIn";
 import SignUp from "./components/SignUp";
 import TestInit from "./components/TestInit";
 import TestInfo from "./components/TestInfo";
+import TestShow from "./components/TestShow";
 import * as serviceWorker from "./serviceWorker";
 //HOCs
 // import authGuard from "./components/HOCs/authGuard";
@@ -33,7 +34,8 @@ ReactDOM.render(
         <Route exact path="/dashboard" component={testInitHOC(TestInit)} />
         <Route exact path="/signup" component={signOnGuard(SignUp)} />
         <Route exact path="/signin" component={signOnGuard(SignIn)} />
-        <Route exact path="/testInfo" component={dashGuard(TestInfo)} />
+        <Route exact path="/testinfo" component={dashGuard(TestInfo)} />
+        <Route exact path="/testshow" component={dashGuard(TestShow)} />
       </App>
     </BrowserRouter>
   </Provider>,

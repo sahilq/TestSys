@@ -14,7 +14,10 @@ function* authSaga() {
 }
 //test watcher
 function* testSaga() {
-  yield all([yield takeLatest(types.TEST_INIT_REQ, test.testInitSaga)]);
+  yield all([
+    yield takeLatest(types.TEST_INIT_REQ, test.testInitSaga),
+    yield takeLatest(types.FETCHALL_TEST, test.fetchTestsSaga)
+  ]);
 }
 
 //Root SAGA

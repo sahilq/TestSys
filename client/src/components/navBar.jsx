@@ -27,6 +27,9 @@ class Header extends Component {
                 <Link className="nav-link" to="/dashboard">
                   Dashboard
                 </Link>
+                <Link className="nav-link" to="/testshow">
+                  Tests
+                </Link>
               </li>
             ) : null}
           </ul>

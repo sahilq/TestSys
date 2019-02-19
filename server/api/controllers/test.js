@@ -19,5 +19,8 @@ module.exports = {
     const test = await Test.findById(req.params._id);
 
     res.json(test).status(200);
+  },
+  getall: async (req, res, next) => {
+    res.json(await Test.find()).status(201);
   }
 };

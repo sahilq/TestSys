@@ -57,6 +57,11 @@ export const deactTest = () => ({
   type: types.DEACTIVATE_TEST
 });
 
+//FETCH ALL TESTS
+export const fetchTests = () => ({
+  type: types.FETCHALL_TEST
+});
+
 //TEST INIT SUCCESS
 export function* testInitSuccess(data) {
   let payload = { testActive: true, testId: data._id };
