@@ -35,7 +35,7 @@ ReactDOM.render(
         <Route exact path="/signup" component={signOnGuard(SignUp)} />
         <Route exact path="/signin" component={signOnGuard(SignIn)} />
         <Route exact path="/testinfo" component={dashGuard(TestInfo)} />
-        <Route exact path="/testshow" component={dashGuard(TestShow)} />
+        <Route exact path="/testshow" component={testInitHOC(TestShow)} />
       </App>
     </BrowserRouter>
   </Provider>,

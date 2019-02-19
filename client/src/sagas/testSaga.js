@@ -25,3 +25,9 @@ export function* fetchTestsSaga() {
     console.error(err);
   }
 }
+
+export function* testEdit(action) {
+  console.log(action);
+  let payload = { testActive: true, testId: action.data };
+  yield put({ type: types.TEST_INIT_SUCCESS, payload });
+}

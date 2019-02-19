@@ -8,7 +8,11 @@ export default OriginalComponent => {
       if (this.props.role !== "recruiter") {
         return this.props.history.push("/");
       } else if (this.props.testActive) {
-        return this.props.history.push("/testinfo");
+        this.props.history.push({
+          pathname: "/testinfo",
+
+          state: { detail: this.props.testId }
+        });
       }
     }
 

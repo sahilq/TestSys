@@ -7,18 +7,21 @@ import * as actions from "../actions/actionCreators";
 class TestInfo extends Component {
   state = { test: {} };
   componentDidMount = () => {
-    axios
-      .get("http://localhost:5000/test/gettest/" + this.props.testId)
-      .then(res => {
-        this.setState({ test: res.data });
-      });
+    console.log("history params", this.props.location.state.detail);
+
+    let id = this.props.location.state.detail;
+    localStorage.setItem("TEST_ID", id);
+    axios.get("http://localhost:5000/test/gettest/" + id).then(res => {
+      this.setState({ test: res.data });
+    });
+    this.props.editTest(id);
   };
 
   deactTest = e => {
     localStorage.removeItem("TEST_ID");
     this.props.deactTest();
 
-    this.props.history.push("/dashboard");
+    this.props.history.push("/testshow");
   };
 
   render() {
@@ -35,10 +38,11 @@ class TestInfo extends Component {
 function mapStateToProps(state) {
   return { testId: state.test.testId };
 }
-
+//
 function mapDispatchToProps(dispatch) {
   return {
-    deactTest: () => dispatch(actions.deactTest())
+    deactTest: () => dispatch(actions.deactTest()),
+    editTest: id => dispatch(actions.testEditReq(id))
   };
 }
 

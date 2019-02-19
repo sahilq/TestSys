@@ -22,6 +22,9 @@ export function signOutReq() {
   return { type: types.SIGN_OUT_REQ };
 }
 
+//
+////
+//////
 //SUCCESS
 //AUTH SUCCESS
 //SIGN UP SUCCESS
@@ -51,6 +54,12 @@ export const testInit = payload => ({
   type: types.TEST_INIT_REQ,
   payload
 });
+export const testEditReq = data => ({
+  type: types.TEST_EDIT_REQ,
+  data
+});
+
+//Test Edit
 
 //TEST DEACTIVATE
 export const deactTest = () => ({

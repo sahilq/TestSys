@@ -2,25 +2,38 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { fetchTests } from "../actions/actionCreators";
 
+import * as actions from "../actions/actionCreators";
+
 class TestShow extends Component {
   componentWillMount = () => {
     this.props.fetchTestsAll();
   };
 
+  handleClick = e => {
+    this.setState({ child: null });
+    let select = e.target.value;
+    this.props.history.push({
+      pathname: "/testinfo",
+
+      state: { detail: select }
+    });
+    // this.props.testEditReq(select);
+  };
   render() {
     console.log("component", this.props.tests);
     return (
       <div>
-        <ul className="list-group">
+        <select onChange={this.handleClick} className="list-group">
           {this.props.tests.map(test => (
-            <li key={test._id}>
-              <button className="btn btn-sm btn-primary m-1">
-                {test.testName}
-              </button>
-              {test.description}
-            </li>
+            <option
+              value={test._id}
+              className="badge badge-info badge-pill"
+              key={test._id}
+            >
+              {test.testName}
+            </option>
           ))}
-        </ul>
+        </select>
       </div>
     );
   }
