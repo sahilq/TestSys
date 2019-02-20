@@ -20,7 +20,8 @@ function* testSaga() {
 
     yield takeLatest(types.GET_TEST, test.getTestSaga),
     yield takeLatest(types.DELETE_TEST, test.deleteTestSaga),
-    yield takeLatest(types.TEST_EDIT_REQ, test.editTestSaga)
+    yield takeLatest(types.TEST_EDIT_REQ, test.editTestSaga),
+    yield takeLatest(types.ADD_QUE_REQ, test.addQueSaga)
   ]);
 }
 

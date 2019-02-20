@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import axios from "axios";
+
+import QueAdd from "./QueAdd";
+import QueDis from "./QueDis";
 import * as actions from "../actions/actionCreators";
 
 class TestInfo extends Component {
@@ -10,8 +12,6 @@ class TestInfo extends Component {
     description: ""
   };
   componentDidMount = () => {
-    console.log("history params", this.props.location.state.detail);
-
     let id = this.props.location.state.detail;
     localStorage.setItem("TEST_ID", id);
     this.props.getTest(id);
@@ -49,12 +49,10 @@ class TestInfo extends Component {
       data.description = this.state.description;
     }
     if (data.description || data.testName) {
-      console.log(data);
       const id = this.props.test._id;
       this.props.editTest(id, data);
       this.editMode();
     } else {
-      console.log("nothing");
       this.editMode();
     }
     this.setState({ testName: "", description: "" });
@@ -69,6 +67,7 @@ class TestInfo extends Component {
   };
 
   render() {
+    console.log(this.props.test.questions);
     return (
       <div className="container">
         {!this.state.isEditing ? (
@@ -101,9 +100,19 @@ class TestInfo extends Component {
                   {this.props.test.description}
                 </div>
               </span>
+              <div className="row">
+                <div className="col">
+                  <QueAdd testId={this.props.test._id} />
+                </div>
+              </div>
             </div>
             <div className="col">
               <h3 className="align-middle">Available Questions</h3>
+              <ul>
+                {this.props.test.questions.map(question => (
+                  <QueDis key={question._id} question={question} />
+                ))}
+              </ul>
             </div>
           </div>
         ) : (

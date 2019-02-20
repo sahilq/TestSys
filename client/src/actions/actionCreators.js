@@ -67,6 +67,18 @@ export const editTestReq = (id, data) => ({
   data
 });
 
+//ADD QUE
+export const addQue = payload => ({
+  type: types.ADD_QUE_REQ,
+  payload
+});
+
+//DELETE_QUE
+export const delQue = id => ({
+  type: types.DEL_QUE_REQ,
+  id
+});
+
 //TEST DEACTIVATE
 export const deactTest = () => ({
   type: types.DEACTIVATE_TEST

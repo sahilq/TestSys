@@ -13,4 +13,6 @@ router.route("/deletetest/:_id").delete(Test.deleteTest);
 router.route("/gettest/:_id").get(Test.gettest);
 router.route("/gettest/:_id").patch(Test.infoEdit);
 
+router.route("/addque/:_id").patch(Test.addQue);
+
 module.exports = router;

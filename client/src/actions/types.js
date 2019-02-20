@@ -23,3 +23,7 @@ export const TEST_EDIT_SUCCESS = "TEST_EDIT_SUCCESS";
 export const GET_TEST = "GET_TEST";
 export const GET_TEST_SUCCESS = "GET_TEST_SUCCESS";
 export const DELETE_TEST = "DELETE_TEST";
+
+export const ADD_QUE_REQ = "ADD_QUE_REQ";
+
+export const DEL_QUE_REQ = "DEL_QUE_REQ";

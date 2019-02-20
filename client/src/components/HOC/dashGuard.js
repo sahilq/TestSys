@@ -4,7 +4,6 @@ import { connect } from "react-redux";
 export default OriginalComponent => {
   class MixedComponent extends Component {
     checkAuth() {
-      console.log("checking_auth SIGNIN SIGNUP");
       if (this.props.role !== "recruiter") {
         return this.props.history.push("/");
       }

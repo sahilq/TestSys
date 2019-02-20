@@ -13,18 +13,15 @@ export default function testReducer(state = initialState, action) {
     return { ...newState, ...action.payload };
   }
   if (action.type === types.FETCH_ALL_SUCCESS) {
-    console.log(action);
     return { ...newState, tests: [...action.payload] };
   }
   if (action.type === types.DEACTIVATE_TEST) {
     return { ...newState, testActive: false, testId: "" };
   }
   if (action.type === types.GET_TEST_SUCCESS) {
-    console.log("red", action.data);
     return { ...newState, test: { ...action.data } };
   }
   if (action.type === types.TEST_EDIT_SUCCESS) {
-    console.log("red", action.data);
     return { ...newState, test: { ...action.payload } };
   }
   return newState;
