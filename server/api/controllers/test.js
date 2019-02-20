@@ -22,5 +22,9 @@ module.exports = {
   },
   getall: async (req, res, next) => {
     res.json(await Test.find()).status(201);
+  },
+  deleteTest: async (req, res, next) => {
+    const test = await Test.findByIdAndDelete(req.params._id);
+    res.json(test).status(200);
   }
 };

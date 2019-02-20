@@ -54,9 +54,10 @@ export const testInit = payload => ({
   type: types.TEST_INIT_REQ,
   payload
 });
-export const testEditReq = data => ({
-  type: types.TEST_EDIT_REQ,
-  data
+//Delete Test
+export const deleteTest = payload => ({
+  type: types.DELETE_TEST,
+  payload
 });
 
 //Test Edit
@@ -69,6 +70,12 @@ export const deactTest = () => ({
 //FETCH ALL TESTS
 export const fetchTests = () => ({
   type: types.FETCHALL_TEST
+});
+
+//GET_TEST
+export const getTest = id => ({
+  type: types.GET_TEST,
+  id
 });
 
 //TEST INIT SUCCESS

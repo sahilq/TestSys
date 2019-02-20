@@ -1,20 +1,16 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import axios from "axios";
 
 import * as actions from "../actions/actionCreators";
 
 class TestInfo extends Component {
-  state = { test: {} };
+  state = {};
   componentDidMount = () => {
     console.log("history params", this.props.location.state.detail);
 
     let id = this.props.location.state.detail;
     localStorage.setItem("TEST_ID", id);
-    axios.get("http://localhost:5000/test/gettest/" + id).then(res => {
-      this.setState({ test: res.data });
-    });
-    this.props.editTest(id);
+    this.props.getTest(id);
   };
 
   deactTest = e => {
@@ -24,25 +20,62 @@ class TestInfo extends Component {
     this.props.history.push("/testshow");
   };
 
+  handleDelete = e => {
+    //handle delete
+    const id = this.props.test._id;
+    this.props.testDelete(id);
+
+    localStorage.removeItem("TEST_ID");
+    this.props.deactTest();
+
+    this.props.history.push("/testshow");
+  };
+
   render() {
     return (
       <div className="container">
-        <h3>{this.state.test.testName}</h3>
-        <p>{this.state.test.description}</p>
-        <button onClick={this.deactTest}>Cancel</button>
+        <div className="row">
+          <div className="col">
+            {" "}
+            <h3>Test Name: {this.props.test.testName}</h3>
+            <button
+              className="btn btn-sm btn-info m-1"
+              onClick={this.deactTest}
+            >
+              &#8592; Back
+            </button>
+            <button
+              onClick={this.handleDelete}
+              className="btn btn-sm btn-danger"
+            >
+              <span>&#9746;</span>
+            </button>
+            <hr />
+            <span>
+              Description: <br />
+              <span className="border border-info p-1">
+                {this.props.test.description}
+              </span>
+            </span>
+          </div>
+          <div className="col">
+            <h3 className="align-middle">Available Questions</h3>
+          </div>
+        </div>
       </div>
     );
   }
 }
 
 function mapStateToProps(state) {
-  return { testId: state.test.testId };
+  return { testId: state.test.testId, test: state.test.test };
 }
 //
 function mapDispatchToProps(dispatch) {
   return {
+    getTest: id => dispatch(actions.getTest(id)),
     deactTest: () => dispatch(actions.deactTest()),
-    editTest: id => dispatch(actions.testEditReq(id))
+    testDelete: id => dispatch(actions.deleteTest(id))
   };
 }
 

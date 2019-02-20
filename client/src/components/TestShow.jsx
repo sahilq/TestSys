@@ -24,6 +24,7 @@ class TestShow extends Component {
     return (
       <div>
         <select onChange={this.handleClick} className="list-group">
+          <option>Select Test:</option>
           {this.props.tests.map(test => (
             <option
               value={test._id}

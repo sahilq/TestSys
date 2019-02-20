@@ -26,8 +26,13 @@ export function* fetchTestsSaga() {
   }
 }
 
-export function* testEdit(action) {
-  console.log(action);
-  let payload = { testActive: true, testId: action.data };
+export function* getTestSaga(action) {
+  const res = yield call(axios.get, `${testUri}/gettest/${action.id}`);
+  yield put({ type: types.GET_TEST_SUCCESS, data: res.data });
+  let payload = { testActive: true, testId: action.id };
   yield put({ type: types.TEST_INIT_SUCCESS, payload });
+}
+
+export function* deleteTestSaga(action) {
+  yield call(axios.delete, `${testUri}/deletetest/${action.payload}`);
 }

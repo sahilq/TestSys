@@ -46,7 +46,8 @@ const store = createStore(
     test: {
       testId: testId,
       testActive: testId ? true : false,
-      tests: []
+      tests: [],
+      test: {}
     }
   },
   composeEnhancer(applyMiddleware(sagaMiddleware))

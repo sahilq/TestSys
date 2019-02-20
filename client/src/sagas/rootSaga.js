@@ -17,7 +17,9 @@ function* testSaga() {
   yield all([
     yield takeLatest(types.TEST_INIT_REQ, test.testInitSaga),
     yield takeLatest(types.FETCHALL_TEST, test.fetchTestsSaga),
-    yield takeLatest(types.TEST_EDIT_REQ, test.testEdit)
+
+    yield takeLatest(types.GET_TEST, test.getTestSaga),
+    yield takeLatest(types.DELETE_TEST, test.deleteTestSaga)
   ]);
 }
 

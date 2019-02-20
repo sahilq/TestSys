@@ -8,6 +8,8 @@ router.route("/gettests").get(Test.getall);
 
 router.route("/addtest").post(Test.addTest);
 
+router.route("/deletetest/:_id").delete(Test.deleteTest);
+
 router.route("/gettest/:_id").get(Test.gettest);
 
 module.exports = router;

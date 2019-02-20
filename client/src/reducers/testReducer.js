@@ -3,7 +3,8 @@ import * as types from "../actions/types";
 const initialState = {
   testActive: false,
   testId: "",
-  tests: []
+  tests: [],
+  test: {}
 };
 
 export default function testReducer(state = initialState, action) {
@@ -17,6 +18,10 @@ export default function testReducer(state = initialState, action) {
   }
   if (action.type === types.DEACTIVATE_TEST) {
     return { ...newState, testActive: false, testId: "" };
+  }
+  if (action.type === types.GET_TEST_SUCCESS) {
+    console.log("red", action.data);
+    return { ...newState, test: { ...action.data } };
   }
   return newState;
 }
