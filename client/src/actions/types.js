@@ -18,6 +18,8 @@ export const FETCHALL_TEST = "FETCHALL_TEST";
 export const FETCH_ALL_SUCCESS = "FETCH_ALL_SUCCESS";
 
 export const TEST_EDIT_REQ = "TEST_EDIT_REQ";
+export const TEST_EDIT_SUCCESS = "TEST_EDIT_SUCCESS";
+
 export const GET_TEST = "GET_TEST";
 export const GET_TEST_SUCCESS = "GET_TEST_SUCCESS";
 export const DELETE_TEST = "DELETE_TEST";

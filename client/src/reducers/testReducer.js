@@ -23,6 +23,10 @@ export default function testReducer(state = initialState, action) {
     console.log("red", action.data);
     return { ...newState, test: { ...action.data } };
   }
+  if (action.type === types.TEST_EDIT_SUCCESS) {
+    console.log("red", action.data);
+    return { ...newState, test: { ...action.payload } };
+  }
   return newState;
 }
 

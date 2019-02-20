@@ -26,5 +26,13 @@ module.exports = {
   deleteTest: async (req, res, next) => {
     const test = await Test.findByIdAndDelete(req.params._id);
     res.json(test).status(200);
+  },
+  infoEdit: async (req, res, next) => {
+    console.log(req.params._id);
+    console.log(req.body);
+    const test = await Test.findByIdAndUpdate(req.params._id, req.body, {
+      new: true
+    });
+    res.status(200).json(test);
   }
 };

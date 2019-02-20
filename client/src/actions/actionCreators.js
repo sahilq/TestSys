@@ -61,6 +61,11 @@ export const deleteTest = payload => ({
 });
 
 //Test Edit
+export const editTestReq = (id, data) => ({
+  type: types.TEST_EDIT_REQ,
+  id,
+  data
+});
 
 //TEST DEACTIVATE
 export const deactTest = () => ({

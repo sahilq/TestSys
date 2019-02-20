@@ -11,5 +11,6 @@ router.route("/addtest").post(Test.addTest);
 router.route("/deletetest/:_id").delete(Test.deleteTest);
 
 router.route("/gettest/:_id").get(Test.gettest);
+router.route("/gettest/:_id").patch(Test.infoEdit);
 
 module.exports = router;

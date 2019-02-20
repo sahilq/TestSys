@@ -36,3 +36,13 @@ export function* getTestSaga(action) {
 export function* deleteTestSaga(action) {
   yield call(axios.delete, `${testUri}/deletetest/${action.payload}`);
 }
+
+export function* editTestSaga(action) {
+  console.log("saga redit", action);
+  const res = yield call(
+    axios.patch,
+    `${testUri}/gettest/${action.id}`,
+    action.data
+  );
+  yield put({ type: types.TEST_EDIT_SUCCESS, payload: res.data });
+}
