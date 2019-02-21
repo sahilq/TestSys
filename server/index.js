@@ -24,6 +24,7 @@ app.use(express.json()); //body parser
 //Handling Routes
 app.use("/user", require("./api/routes/users"));
 app.use("/test", require("./api/routes/test"));
+app.use("/invite", require("./api/routes/invite"));
 
 //setting port
 const port = process.env.PORT || 5000;

@@ -9,6 +9,7 @@ import axios from "axios";
 import store from "./store/index";
 //components
 import App from "./components/App";
+import Home from "./components/Home";
 import SignIn from "./components/SignIn";
 import SignUp from "./components/SignUp";
 import TestInit from "./components/TestInit";
@@ -20,6 +21,7 @@ import * as serviceWorker from "./serviceWorker";
 import signOnGuard from "./components/HOC/signOnGuard";
 import dashGuard from "./components/HOC/dashGuard";
 import testInitHOC from "./components/HOC/testInitHOC";
+import homeRedir from "./components/HOC/homeRedir";
 
 //fetch token and user details from localstorage
 const jwtToken = localStorage.getItem("JWT_TOKEN");
@@ -39,7 +41,9 @@ ReactDOM.render(
     <BrowserRouter>
       <App>
         {/* Send components to App.js as children props to be rendered */}
-        <Route exact path="/dashboard" component={testInitHOC(TestInit)} />
+        <Route exact path="/" component={homeRedir(Home)} />
+
+        <Route exact path="/testinit" component={testInitHOC(TestInit)} />
         <Route exact path="/signup" component={signOnGuard(SignUp)} />
         <Route exact path="/signin" component={signOnGuard(SignIn)} />
         <Route exact path="/testinfo" component={dashGuard(TestInfo)} />

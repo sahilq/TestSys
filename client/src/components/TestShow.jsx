@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+
 import { fetchTests } from "../actions/actionCreators";
 
-import * as actions from "../actions/actionCreators";
+import ParticipantsList from "./ParticipantsList";
 
 class TestShow extends Component {
   componentWillMount = () => {
@@ -19,27 +20,41 @@ class TestShow extends Component {
     });
   };
   render() {
-    console.log("component", this.props.tests);
     return (
-      <div>
-        <select onChange={this.handleClick} className="list-group">
-          <option>Select Test:</option>
-          {this.props.tests.map(test => (
-            <option
-              value={test._id}
-              className="badge badge-info badge-pill"
-              key={test._id}
+      <div className="container">
+        <div className="row">
+          {" "}
+          <div className="col">
+            <h3>
+              <i className="text-muted">Welcome</i>{" "}
+              <small>{this.props.userName}</small>
+            </h3>
+            <div>
+              Designation:<span className="ml-3">Recruiter</span>
+            </div>
+            <select
+              onChange={this.handleClick}
+              className="list-group btn btn-lg btn-outline-primary mr-auto my-2"
             >
-              {test.testName}
-            </option>
-          ))}
-        </select>
+              <option>Select Test:</option>
+              {this.props.tests.map(test => (
+                <option value={test._id} key={test._id}>
+                  {test.testName}
+                </option>
+              ))}
+            </select>
+            <hr color="blue" />
+            {/* List of Registered participants */}
+            <h3>List of registered participants</h3>
+            <ParticipantsList />
+          </div>
+          <div className="col">{/* Marks wise Participants list */}</div>
+        </div>
       </div>
     );
   }
 }
 function mapStateToProps(state) {
-  console.log(state);
   return {
     tests: state.test.tests
   };

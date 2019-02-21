@@ -4,15 +4,18 @@ import { connect } from "react-redux";
 import QueAdd from "./QueAdd";
 import QueDis from "./QueDis";
 import * as actions from "../actions/actionCreators";
-
 class TestInfo extends Component {
+  componentDidMount = () => {
+    console.log(this.props.match.params.testId);
+  };
   state = {
     isEditing: false,
     testName: "",
     description: ""
   };
+
   componentDidMount = () => {
-    let id = this.props.location.state.detail;
+    let id = this.props.match.params.testId;
     localStorage.setItem("TEST_ID", id);
     this.props.getTest(id);
   };
@@ -67,8 +70,10 @@ class TestInfo extends Component {
   };
 
   render() {
+    console.log(this.props);
     return (
       <div className="container">
+        <h1>Rendered</h1>
         {!this.state.isEditing ? (
           <div className="row">
             <div className="col">
@@ -156,7 +161,6 @@ class TestInfo extends Component {
     );
   }
 }
-
 function mapStateToProps(state) {
   return { testId: state.test.testId, test: state.test.test };
 }

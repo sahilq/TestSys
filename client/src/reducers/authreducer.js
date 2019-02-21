@@ -5,7 +5,8 @@ const initialState = {
   token: "",
   errorMessage: "",
   userId: "",
-  userName: ""
+  userName: "",
+  participants: []
 };
 
 export default (state = initialState, action) => {
@@ -46,6 +47,11 @@ export default (state = initialState, action) => {
         errorMessage: "",
         token: null,
         userId: ""
+      };
+    case types.GET_PARTICIPANTS_SUCCESS:
+      return {
+        ...state,
+        participants: action.payload
       };
     default:
       return state;

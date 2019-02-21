@@ -49,6 +49,11 @@ export function* authError() {
   });
 }
 
+//Fetch participants
+export const getParticipants = () => ({
+  type: types.GET_PARTICIPANTS
+});
+
 //TEST INIT REQ
 export const testInit = payload => ({
   type: types.TEST_INIT_REQ,

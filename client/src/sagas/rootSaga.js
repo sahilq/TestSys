@@ -9,7 +9,8 @@ function* authSaga() {
   yield all([
     yield takeLatest(types.SIGN_UP_REQ, auth.signUp),
     yield takeLatest(types.SIGN_IN_REQ, auth.signIn),
-    yield takeLatest(types.SIGN_OUT_REQ, auth.signOut)
+    yield takeLatest(types.SIGN_OUT_REQ, auth.signOut),
+    yield takeLatest(types.GET_PARTICIPANTS, auth.getPartsSaga)
   ]);
 }
 //test watcher

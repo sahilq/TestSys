@@ -1,7 +1,8 @@
-import { call } from "redux-saga/effects";
+import { call, put } from "redux-saga/effects";
 import axios from "axios";
 
 import * as actions from "../actions/actionCreators";
+import * as types from "../actions/types";
 
 const userUri = "http://localhost:5000/user";
 
@@ -54,5 +55,15 @@ export function* signOut() {
     yield (axios.defaults.headers.common["Authorization"] = "");
   } catch (e) {
     console.error("err", e);
+  }
+}
+
+//Fetch Participants
+export function* getPartsSaga() {
+  try {
+    const res = yield call(axios.get, "http://localhost:5000/user/getparts");
+    yield put({ type: types.GET_PARTICIPANTS_SUCCESS, payload: res.data });
+  } catch (e) {
+    console.error(e);
   }
 }
