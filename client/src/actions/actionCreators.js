@@ -74,9 +74,9 @@ export const addQue = payload => ({
 });
 
 //DELETE_QUE
-export const delQue = id => ({
+export const delQue = payload => ({
   type: types.DEL_QUE_REQ,
-  id
+  payload
 });
 
 //TEST DEACTIVATE

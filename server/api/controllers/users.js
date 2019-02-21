@@ -64,5 +64,9 @@ module.exports = {
   getAll: async (req, res, next) => {
     const users = await User.find();
     res.json(users).status(201);
+  },
+  getParts: async (req, res, next) => {
+    const users = await User.find({ role: "participant" });
+    res.json(users).status(201);
   }
 };

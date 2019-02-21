@@ -47,10 +47,19 @@ export function* editTestSaga(action) {
 }
 
 export function* addQueSaga(action) {
-  console.log(action);
   const res = yield axios.patch(
     "http://localhost:5000/test/addque/" + action.payload.id,
     action.payload.question
+  );
+  yield put({ type: types.TEST_EDIT_SUCCESS, payload: res.data });
+}
+
+export function* deletQueSaga(action) {
+  console.log(action);
+  let id = action.payload.id;
+  const res = yield axios.patch(
+    "http://localhost:5000/test/deleteque/" + action.payload.testId,
+    { id }
   );
   yield put({ type: types.TEST_EDIT_SUCCESS, payload: res.data });
 }

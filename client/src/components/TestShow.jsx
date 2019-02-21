@@ -17,7 +17,6 @@ class TestShow extends Component {
 
       state: { detail: select }
     });
-    // this.props.testEditReq(select);
   };
   render() {
     console.log("component", this.props.tests);

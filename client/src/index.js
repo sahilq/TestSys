@@ -26,6 +26,14 @@ const jwtToken = localStorage.getItem("JWT_TOKEN");
 //set deafault headers
 axios.defaults.headers.common["Authorization"] = jwtToken;
 
+// window.onbeforeunload = function() {
+//   localStorage.removeItem("JWT_TOKEN");
+//   localStorage.removeItem("USER");
+//   localStorage.removeItem("TEST_ID");
+
+//   return "";
+// };
+
 ReactDOM.render(
   <Provider store={store}>
     <BrowserRouter>

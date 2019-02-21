@@ -1,9 +1,16 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+
+import * as actions from "../actions/actionCreators";
+
 class QueDis extends Component {
   state = {};
 
-  deleteQuestion = () => {
+  deleteQuestion = e => {
     const id = this.props.question._id;
+    const testId = e.target.value;
+    const data = { testId, id };
+    this.props.delQue(data);
   };
   render() {
     let question = this.props.question;
@@ -17,6 +24,7 @@ class QueDis extends Component {
               <button
                 className="m-auto float-right btn btn-sm btn-link"
                 onClick={this.deleteQuestion}
+                value={this.props.testId}
               >
                 Delete
               </button>
@@ -43,4 +51,18 @@ class QueDis extends Component {
   }
 }
 
-export default QueDis;
+function mapstateToProps(state) {
+  return {
+    testId: state.test.testId
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    delQue: data => dispatch(actions.delQue(data))
+  };
+}
+export default connect(
+  mapstateToProps,
+  mapDispatchToProps
+)(QueDis);

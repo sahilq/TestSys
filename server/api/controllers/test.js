@@ -26,7 +26,7 @@ module.exports = {
     res.json(test).status(200);
   },
   infoEdit: async (req, res, next) => {
-    const test = await Test.findByIdAndUpdate(req.params._id, req.body, {
+    const test = await Test.findOneAndUpdate(req.params._id, req.body, {
       new: true
     });
     res.status(200).json(test);
@@ -38,5 +38,20 @@ module.exports = {
     test.questions.push(question);
     await test.save();
     res.json(test).status(200);
+  },
+  delQue: async (req, res, next) => {
+    console.log("testId", req.params._id);
+    console.log("que to delete ", req.body.id);
+    const test = await Test.findById(req.params._id);
+    console.log(
+      test.questions.filter(que => {
+        if (JSON.stringify(que._id) === JSON.stringify(req.body.id)) {
+          test.questions.pull(que);
+        }
+      })
+    );
+    test.save();
+    console.log(test);
+    res.status(200).json(test);
   }
 };

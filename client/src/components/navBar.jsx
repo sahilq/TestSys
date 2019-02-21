@@ -25,13 +25,17 @@ class Header extends Component {
             {this.props.isAuth && this.props.role === "recruiter" ? (
               <li className="nav-item">
                 <Link className="nav-link" to="/dashboard">
-                  Dashboard
+                  Create Test
                 </Link>
                 <Link className="nav-link" to="/testshow">
                   Tests
                 </Link>
               </li>
-            ) : null}
+            ) : (
+              <Link className="nav-link" to="/invites">
+                Invites
+              </Link>
+            )}
           </ul>
 
           <ul className="nav navbar-nav ml-auto">

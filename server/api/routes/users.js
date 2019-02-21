@@ -26,7 +26,12 @@ router
 
 //secret route
 router.route("/secret").get(passportJWT, User.secret);
-router.route("getall").get(User.getAll);
+
+//get all participants
+router.route("/getall").get(User.getAll);
+
+//get all participants
+router.route("/getparts").get(User.getParts);
 
 //export module
 module.exports = router;
