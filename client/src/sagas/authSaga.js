@@ -27,9 +27,11 @@ export function* signUp(action) {
       action.payload.role = "participant";
     }
     const res = yield call(axios.post, userUri + "/signup", action.payload);
+    console.log(res);
     yield call(svAuthInfo, res.data);
+    yield call(actions.signUpSuccess, res.data);
   } catch (e) {
-    yield call(actions.authError);
+    yield call(actions.authErrorReg);
     console.error(e);
   }
 }
@@ -42,7 +44,7 @@ export function* signIn(action) {
     yield call(svAuthInfo, res.data);
     yield call(actions.signInSuccess, res.data);
   } catch (e) {
-    yield call(actions.authError);
+    yield call(actions.authErrorLog);
     console.error(e);
   }
 }

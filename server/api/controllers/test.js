@@ -19,7 +19,12 @@ module.exports = {
     res.json(test).status(200);
   },
   getall: async (req, res, next) => {
-    res.json(await Test.find()).status(201);
+    try {
+      const tests = await Test.find(req.params);
+      res.json(tests).status(201);
+    } catch (CastError) {
+      res.json({ message: "Cast Error" }).status(300);
+    }
   },
   deleteTest: async (req, res, next) => {
     const test = await Test.findByIdAndDelete(req.params._id);
@@ -40,18 +45,15 @@ module.exports = {
     res.json(test).status(200);
   },
   delQue: async (req, res, next) => {
-    console.log("testId", req.params._id);
-    console.log("que to delete ", req.body.id);
     const test = await Test.findById(req.params._id);
-    console.log(
-      test.questions.filter(que => {
-        if (JSON.stringify(que._id) === JSON.stringify(req.body.id)) {
-          test.questions.pull(que);
-        }
-      })
-    );
+
+    test.questions.filter(que => {
+      if (JSON.stringify(que._id) === JSON.stringify(req.body.id)) {
+        test.questions.pull(que);
+      }
+    });
     test.save();
-    console.log(test);
+
     res.status(200).json(test);
   }
 };

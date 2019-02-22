@@ -41,10 +41,18 @@ export function* signOut() {
   yield put({ type: types.SIGN_OUT_SUCCESS, payload: "" });
 }
 
-//ERROR
-export function* authError() {
+//ERROR Sign Up
+export function* authErrorReg() {
   yield put({
-    type: types.AUTH_ERROR,
+    type: types.AUTH_ERROR_REG,
+    payload: "Registration Failed...."
+  });
+}
+
+//ERROR Sign In
+export function* authErrorLog() {
+  yield put({
+    type: types.AUTH_ERROR_LOG,
     payload: "Authentication Failed...."
   });
 }
@@ -90,8 +98,9 @@ export const deactTest = () => ({
 });
 
 //FETCH ALL TESTS
-export const fetchTests = () => ({
-  type: types.FETCHALL_TEST
+export const fetchTests = userId => ({
+  type: types.FETCHALL_TEST,
+  userId
 });
 
 //GET_TEST

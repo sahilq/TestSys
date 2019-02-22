@@ -3,7 +3,9 @@ import * as types from "../actions/types";
 const initialState = {
   isAuthenticated: false,
   token: "",
-  errorMessage: "",
+  regErrorMessage: "",
+  logErrorMessage: "",
+
   userId: "",
   userName: "",
   participants: []
@@ -12,6 +14,7 @@ const initialState = {
 export default (state = initialState, action) => {
   switch (action.type) {
     case types.SIGN_UP_SUCCESS:
+      console.log("Sign up reducer", action.payload);
       return {
         ...state,
         isAuthenticated: true,
@@ -31,11 +34,20 @@ export default (state = initialState, action) => {
         userName: action.payload.user.name,
         role: action.payload.user.role
       };
-    case types.AUTH_ERROR:
+    case types.AUTH_ERROR_REG:
       return {
         ...state,
         isAuthenticated: false,
-        errorMessage: action.payload,
+        regErrorMessage: action.payload,
+        token: null,
+        userId: "",
+        role: ""
+      };
+    case types.AUTH_ERROR_LOG:
+      return {
+        ...state,
+        isAuthenticated: false,
+        logErrorMessage: action.payload,
         token: null,
         userId: "",
         role: ""

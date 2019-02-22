@@ -5,8 +5,12 @@ class Home extends Component {
   state = {};
   render() {
     return (
-      <div className="container">
-        <h1>Login To Continue</h1>
+      <div className="container m-auto">
+        <div className="row m-auto">
+          <div className="col m-auto">
+            <h1 className="m-5 p-5">Login To Continue</h1>
+          </div>
+        </div>
       </div>
     );
   }

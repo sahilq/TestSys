@@ -7,7 +7,9 @@ import ParticipantsList from "./ParticipantsList";
 
 class TestShow extends Component {
   componentWillMount = () => {
-    this.props.fetchTestsAll();
+    const userId = this.props.userId;
+
+    this.props.fetchTestsAll(userId);
   };
 
   handleClick = e => {
@@ -56,12 +58,13 @@ class TestShow extends Component {
 }
 function mapStateToProps(state) {
   return {
-    tests: state.test.tests
+    tests: state.test.tests,
+    userId: state.auth.userId
   };
 }
 function mapDispatchToProps(dispatch) {
   return {
-    fetchTestsAll: () => dispatch(fetchTests())
+    fetchTestsAll: userId => dispatch(fetchTests(userId))
   };
 }
 

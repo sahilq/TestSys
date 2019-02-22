@@ -43,19 +43,27 @@ class CreateInvite extends Component {
             <ul className="list-unstyled">
               {this.props.tests &&
                 this.props.tests.map(test => (
-                  <li key={test._id}>
-                    <span>{test.testName}</span>
-                    <span>
+                  <li className="border border-success" key={test._id}>
+                    <div className="p-1">
+                      {test.testName}
+
                       {!this.state.invitedPosts.includes(test._id) ? (
                         <button
                           onClick={this.handleClick}
-                          className="btn btn-link ml-auto float-right"
+                          className="btn btn-link float-right m-0 p-0"
                           value={test._id}
                         >
                           Invite
                         </button>
-                      ) : null}
-                    </span>
+                      ) : (
+                        <button
+                          className="btn btn-link disabled float-right m-0 p-0"
+                          value={test._id}
+                        >
+                          Invited
+                        </button>
+                      )}
+                    </div>
                   </li>
                 ))}
             </ul>

@@ -2,9 +2,74 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 
 import * as actions from "../actions/actionCreators";
+import ShowQue from "./ShowQue";
+import EditQue from "./EditQue";
 
 class QueDis extends Component {
-  state = {};
+  state = {
+    isEditing: false,
+    question: "",
+    answer: "",
+    option1: "",
+    option2: "",
+    option3: "",
+    option4: ""
+  };
+
+  handleChange = e => {
+    this.setState({ [e.target.id]: e.target.value });
+  };
+
+  checkOptions = () => {
+    const { option1, option2, option3, option4, answer } = this.props.question;
+    if (
+      answer === option1 ||
+      answer === option2 ||
+      answer === option3 ||
+      answer === option4
+    ) {
+      if (
+        option1 !== option2 &&
+        option1 !== option3 &&
+        option1 !== option4 &&
+        option2 !== option3 &&
+        option2 !== option4 &&
+        option3 !== option4
+      ) {
+        return true;
+      }
+    }
+  };
+
+  handleSubmit = e => {
+    e.preventDefault();
+    let check = this.checkOptions();
+    if (check) {
+      const question = this.state;
+      const id = this.props.testId;
+      const data = { id, question };
+      console.log(data);
+      this.setState({
+        question: "",
+        answer: "",
+        option1: "",
+        option2: "",
+        option3: "",
+        option4: ""
+      });
+      this.editToggle();
+    } else {
+      alert("Re-check Options");
+    }
+  };
+
+  editToggle = () => {
+    if (this.state.isEditing) {
+      this.setState({ isEditing: false });
+    } else {
+      this.setState({ isEditing: true });
+    }
+  };
 
   deleteQuestion = e => {
     const id = this.props.question._id;
@@ -13,41 +78,15 @@ class QueDis extends Component {
     this.props.delQue(data);
   };
   render() {
-    let question = this.props.question;
-    return (
-      <div className="container border p-1 m-2">
-        <div className="row">
-          <div className="col ml-auto">
-            <h5 className="ml-auto border-bottom border-info">
-              Question:
-              <i> {question.question}</i>
-              <button
-                className="m-auto float-right btn btn-sm btn-link"
-                onClick={this.deleteQuestion}
-                value={this.props.testId}
-              >
-                Delete
-              </button>
-            </h5>
-            <div className="row ml-auto">
-              Option 1:
-              <span className="mr-5">{question.option1}</span>
-              Option 2:
-              <span className="mr-5">{question.option2}</span>
-            </div>
-            <div className="row ml-auto">
-              Option 3:
-              <span className="mr-5">{question.option3}</span>
-              Option 4:
-              <span className="mr-5">{question.option4}</span>
-            </div>
-            <div className="row  border border-info m-auto">
-              Answer: <span>{question.answer}</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    );
+    if (!this.state.isEditing) {
+      return (
+        <ShowQue question={this.props.question} editToggle={this.editToggle} />
+      );
+    } else {
+      return (
+        <EditQue question={this.props.question} editToggle={this.editToggle} />
+      );
+    }
   }
 }
 

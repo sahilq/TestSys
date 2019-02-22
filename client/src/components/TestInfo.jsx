@@ -158,7 +158,11 @@ class TestInfo extends Component {
 }
 
 function mapStateToProps(state) {
-  return { testId: state.test.testId, test: state.test.test };
+  return {
+    testId: state.test.testId,
+    test: state.test.test,
+    userId: state.auth.userId
+  };
 }
 //
 function mapDispatchToProps(dispatch) {

@@ -15,6 +15,7 @@ class SignUp extends Component {
     const data = this.state;
     this.props.signUp(data);
     this.setState({ email: "", password: "", name: "", role: "" });
+    this.props.history.push("/signup");
   };
   componentDidMount() {}
   render() {
@@ -101,7 +102,9 @@ class SignUp extends Component {
 }
 
 function mapStateToProps(state) {
-  return {};
+  return {
+    errorMessage: state.auth.regErrorMessage
+  };
 }
 function mapDispatchToProps(dispatch) {
   return {
