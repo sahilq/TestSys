@@ -1,15 +1,15 @@
-const initialState = {
-  invitedPosts:[]
+import * as types from "../actions/types";
 
-}
+const initialState = {
+  invitedTo: []
+};
 
 export default (state = initialState, { type, payload }) => {
   switch (type) {
+    case types.INVITE_SUCCESS:
+      return { ...state, invitedTo: payload };
 
-  case :
-    return { ...state, ...payload }
-
-  default:
-    return state
+    default:
+      return state;
   }
-}
+};

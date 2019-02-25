@@ -124,3 +124,17 @@ export function* testInitSuccess(data) {
 export function* testDeact() {
   yield put(types.DEACTIVATE_TEST_SUCCESS);
 }
+
+//INVITES Actions
+
+//create Invite
+export const createInv = payload => ({
+  type: types.CREATE_INVITE,
+  payload
+});
+
+// Fetch Invites
+export const fetchInvites = payload => ({
+  type: types.GET_INVITES,
+  payload
+});

@@ -13,7 +13,6 @@ class TestShow extends Component {
   };
 
   handleClick = e => {
-    this.setState({ child: null });
     let select = e.target.value;
     this.props.history.push({
       pathname: "/testinfo",
@@ -25,10 +24,9 @@ class TestShow extends Component {
     return (
       <div className="container">
         <div className="row">
-          {" "}
           <div className="col">
             <h3>
-              <i className="text-muted">Welcome</i>{" "}
+              <i className="text-muted">Welcome</i>
               <small>{this.props.userName}</small>
             </h3>
             <div>
@@ -48,7 +46,7 @@ class TestShow extends Component {
             <hr color="blue" />
             {/* List of Registered participants */}
             <h3>List of registered participants</h3>
-            <ParticipantsList />
+            <ParticipantsList history={this.props.history} />
           </div>
           <div className="col">{/* Marks wise Participants list */}</div>
         </div>

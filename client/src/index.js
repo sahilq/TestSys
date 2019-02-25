@@ -15,6 +15,8 @@ import SignUp from "./components/SignUp";
 import TestInit from "./components/TestInit";
 import TestInfo from "./components/TestInfo";
 import TestShow from "./components/TestShow";
+import PartDash from "./components/PartDash";
+import InviteBox from "./components/InviteBox";
 import * as serviceWorker from "./serviceWorker";
 //HOCs
 // import authGuard from "./components/HOCs/authGuard";
@@ -42,6 +44,8 @@ ReactDOM.render(
       <App>
         {/* Send components to App.js as children props to be rendered */}
         <Route exact path="/" component={homeRedir(Home)} />
+        <Route exact path="/invite" component={InviteBox} />
+        <Route exact path="/pdashboard" component={PartDash} />
 
         <Route exact path="/testinit" component={testInitHOC(TestInit)} />
         <Route exact path="/signup" component={signOnGuard(SignUp)} />

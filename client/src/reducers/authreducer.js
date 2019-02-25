@@ -14,7 +14,6 @@ const initialState = {
 export default (state = initialState, action) => {
   switch (action.type) {
     case types.SIGN_UP_SUCCESS:
-      console.log("Sign up reducer", action.payload);
       return {
         ...state,
         isAuthenticated: true,
@@ -24,7 +23,6 @@ export default (state = initialState, action) => {
         userName: action.payload.user.name
       };
     case types.SIGN_IN_SUCCESS:
-      console.log(action.payload);
       return {
         ...state,
         isAuthenticated: true,

@@ -34,18 +34,6 @@ module.exports = {
       name: Joi.string().required(),
       password: Joi.string().required(),
       role: Joi.string().valid("recruiter", "participant")
-    }),
-    postSchema: Joi.object().keys({
-      title: Joi.string().required(),
-      article: Joi.string().required(),
-      userId: Joi.objectId().required(),
-      userName: Joi.string().required()
-    }),
-    commentSchema: Joi.object().keys({
-      postId: Joi.objectId().required(),
-      userId: Joi.objectId().required(),
-      userName: Joi.string().required(),
-      body: Joi.string().required()
     })
   }
 };

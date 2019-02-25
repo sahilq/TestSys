@@ -1,70 +1,51 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import axios from "axios";
+
+import * as actions from "../actions/actionCreators";
 
 class CreateInvite extends Component {
-  state = {
-    invitedPosts: []
-  };
-  componentDidMount = () => {
-    axios
-      .get(
-        "http://localhost:5000/invite/getinvites/" + this.props.participantId
-      )
-      .then(res => {
-        let posts = [];
-        res.data.map(el => {
-          posts.push(el.testId);
-        });
-
-        this.setState({ invitedPosts: [...posts] });
-      });
-  };
+  state = {};
 
   handleClick = e => {
     const data = {
       testId: e.target.value,
-      participantId: this.props.participantId
+      participantId: this.props.participantId,
+      testName: e.target.id
     };
-    axios.post("http://localhost:5000/invite/createinvite", data).then(res => {
-      const list = [];
-      list.push(res.data.testId);
-      this.setState({ invitedPosts: [...list] });
-    });
+    console.log(e.target);
+    this.props.createInv(data);
   };
 
   render() {
+    let arr = [];
+    {
+      this.props.invitedTo.map(invite => {
+        if (invite.participantId === this.props.participantId) {
+          arr.push(invite.testId);
+        }
+      });
+    }
     return (
       <div className="container">
         <div className="row">
           <div className="col">
-            <ul className="list-unstyled">
-              {this.props.tests &&
-                this.props.tests.map(test => (
-                  <li className="border border-success" key={test._id}>
-                    <div className="p-1">
-                      {test.testName}
-
-                      {!this.state.invitedPosts.includes(test._id) ? (
-                        <button
-                          onClick={this.handleClick}
-                          className="btn btn-link float-right m-0 p-0"
-                          value={test._id}
-                        >
-                          Invite
-                        </button>
-                      ) : (
-                        <button
-                          className="btn btn-link disabled float-right m-0 p-0"
-                          value={test._id}
-                        >
-                          Invited
-                        </button>
-                      )}
-                    </div>
-                  </li>
-                ))}
-            </ul>
+            <div>
+              {this.props.test.testName}
+              {arr.includes(this.props.test._id) ? (
+                <button className="btn btn-link float-right disabled">
+                  Invited
+                </button>
+              ) : (
+                <button
+                  className="btn btn-link float-right"
+                  onClick={this.handleClick}
+                  value={this.props.test._id}
+                  id={this.props.test.testName}
+                >
+                  Invite
+                </button>
+              )}
+            </div>
           </div>
         </div>
       </div>
@@ -74,11 +55,14 @@ class CreateInvite extends Component {
 
 function mapStateToProps(state) {
   return {
-    tests: state.test.tests
+    invitedTo: state.invite.invitedTo
   };
 }
 function mapDispatchToProps(dispatch) {
-  return {};
+  return {
+    createInv: data => dispatch(actions.createInv(data)),
+    getInvites: participantId => dispatch(actions.fetchInvites(participantId))
+  };
 }
 
 export default connect(
