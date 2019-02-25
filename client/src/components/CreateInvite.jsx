@@ -16,7 +16,7 @@ class CreateInvite extends Component {
         res.data.map(el => {
           posts.push(el.testId);
         });
-        console.log("post map", posts);
+
         this.setState({ invitedPosts: [...posts] });
       });
   };
@@ -31,11 +31,9 @@ class CreateInvite extends Component {
       list.push(res.data.testId);
       this.setState({ invitedPosts: [...list] });
     });
-    console.log(this.state.invitedPosts);
   };
 
   render() {
-    console.log(this.props);
     return (
       <div className="container">
         <div className="row">

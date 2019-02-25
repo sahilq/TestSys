@@ -55,5 +55,17 @@ module.exports = {
     test.save();
 
     res.status(200).json(test);
+  },
+  editQue: async (req, res, next) => {
+    const test = await Test.findById(req.params._id);
+    let newQue = new Question(req.body.question);
+    test.questions.filter(que => {
+      if (JSON.stringify(que._id) === JSON.stringify(req.body.id)) {
+        test.questions.pull(que);
+      }
+    });
+    test.questions.push(newQue);
+    await test.save();
+    res.json(test).status(200);
   }
 };

@@ -82,3 +82,17 @@ export function* deletQueSaga(action) {
     console.error(error);
   }
 }
+
+export function* editQueSaga(action) {
+  try {
+    let id = action.payload.id;
+    const question = action.payload.question;
+    const res = yield axios.patch(
+      "http://localhost:5000/test/editque/" + action.payload.testId,
+      { id, question }
+    );
+    yield put({ type: types.TEST_EDIT_SUCCESS, payload: res.data });
+  } catch (error) {
+    console.error(error);
+  }
+}

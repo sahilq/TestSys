@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-// import * as actions from "../actions/actionCreators";
+import * as actions from "../actions/actionCreators";
 
 class EditQue extends Component {
   state = {
@@ -60,11 +60,19 @@ class EditQue extends Component {
     if (check) {
       const testId = this.props.testId;
       const id = this.props.question._id;
+      //api req to edit question
+      const payload = {
+        id,
+        testId,
+        question
+      };
+      this.props.queEdit(payload);
 
-      console.log(id, testId, question);
       this.props.editToggle();
     } else {
-      alert("wrong input");
+      alert(
+        "Note:\n1:-Option Should not match Each Other.\n2:-Only One Option Should Match Answer.\n3:- One Option Must Match Answer."
+      );
       this.props.editToggle();
     }
     this.setState({
@@ -92,7 +100,7 @@ class EditQue extends Component {
                 <input
                   className="form-control input-lg"
                   type="text"
-                  placeholder="Question ?"
+                  placeholder={this.props.question.question}
                   value={this.state.question}
                   id="question"
                   onChange={this.handleChange}
@@ -106,7 +114,7 @@ class EditQue extends Component {
                   onChange={this.handleChange}
                   type="text"
                   autoComplete="off"
-                  placeholder="Option 1"
+                  placeholder={this.props.question.option1}
                   value={this.state.option1}
                 />
                 <input
@@ -116,7 +124,7 @@ class EditQue extends Component {
                   type="text"
                   autoComplete="off"
                   value={this.state.option2}
-                  placeholder="Option 2"
+                  placeholder={this.props.question.option2}
                 />{" "}
                 <input
                   className="m-1"
@@ -125,7 +133,7 @@ class EditQue extends Component {
                   value={this.state.option3}
                   onChange={this.handleChange}
                   type="text"
-                  placeholder="Option 3"
+                  placeholder={this.props.question.option3}
                 />
                 <input
                   className="m-1"
@@ -134,7 +142,7 @@ class EditQue extends Component {
                   value={this.state.option4}
                   onChange={this.handleChange}
                   type="text"
-                  placeholder="Option 4"
+                  placeholder={this.props.question.option4}
                 />
               </div>
               <div className="form-row ml-auto">
@@ -146,20 +154,20 @@ class EditQue extends Component {
                   onChange={this.handleChange}
                   value={this.state.answer}
                   type="text"
-                  placeholder="Answer"
+                  placeholder={this.props.question.answer}
                 />
                 <input
                   type="submit"
-                  value="Add"
+                  value="Change"
                   className="btn btn-primary btn-sm m-1"
                 />
               </div>
             </form>
             <button
-              className="m-auto float-right btn btn-sm btn-link"
+              className="btn btn-sm btn-info m-1"
               onClick={this.props.editToggle}
             >
-              Cancel
+              &#8592; Back
             </button>
           </div>
         </div>
@@ -175,7 +183,9 @@ function mapstateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return {};
+  return {
+    queEdit: payload => dispatch(actions.editQue(payload))
+  };
 }
 export default connect(
   mapstateToProps,

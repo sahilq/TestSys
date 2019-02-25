@@ -92,6 +92,12 @@ export const delQue = payload => ({
   payload
 });
 
+//Edit que
+export const editQue = payload => ({
+  type: types.EDIT_QUE,
+  payload
+});
+
 //TEST DEACTIVATE
 export const deactTest = () => ({
   type: types.DEACTIVATE_TEST
