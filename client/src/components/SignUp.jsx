@@ -17,7 +17,7 @@ class SignUp extends Component {
     this.setState({ email: "", password: "", name: "", role: "" });
     this.props.history.push("/signup");
   };
-  componentDidMount() {}
+
   render() {
     return (
       <div className="container">

@@ -4,9 +4,7 @@ import { connect } from "react-redux";
 export default OriginalComponent => {
   class MixedComponent extends Component {
     checkAuth() {
-      if (this.props.isAuth && this.props.role === "recruiter") {
-        return this.props.history.push("/");
-      } else if (this.props.isAuth && this.props.role === "participant") {
+      if (this.props.isAuth) {
         return this.props.history.push("/");
       }
     }
