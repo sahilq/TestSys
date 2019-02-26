@@ -15,7 +15,13 @@ class Header extends Component {
   }
   render() {
     return (
-      <nav className="navbar navbar-expand navbar-light bg-primary mb-1">
+      <nav
+        className="navbar navbar-expand mb-1"
+        style={{
+          backgroundImage:
+            "linear-gradient(141deg, #9fb8ad 0%, #1fc8db 51%, #2cb5e8 75%)"
+        }}
+      >
         <Link className="navbar-brand" to="/">
           HOME
         </Link>
