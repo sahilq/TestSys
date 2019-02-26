@@ -13,6 +13,7 @@ import Home from "./components/Home";
 import SignIn from "./components/SignIn";
 import SignUp from "./components/SignUp";
 import TestInit from "./components/TestInit";
+import TestMain from "./components/TestMain";
 import TestInfo from "./components/TestInfo";
 import TestShow from "./components/TestShow";
 import PartDash from "./components/PartDash";
@@ -46,6 +47,7 @@ ReactDOM.render(
         <Route exact path="/" component={homeRedir(Home)} />
         <Route exact path="/invite" component={InviteBox} />
         <Route exact path="/pdashboard" component={PartDash} />
+        <Route exact path="/teststart/:id" component={TestMain} />
 
         <Route exact path="/testinit" component={testInitHOC(TestInit)} />
         <Route exact path="/signup" component={signOnGuard(SignUp)} />
