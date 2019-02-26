@@ -9,17 +9,20 @@ class TestMain extends Component {
   state = {
     qn: 0,
     isCompleted: false,
-    total: this.props.test.questions.length,
+    total: 0,
     score: 0,
-    length: this.props.test.questions.length
+    length: 0
   };
-  componentDidMount() {
-    if (this.props.role !== "participant") {
-      return this.props.history.push("/");
-    }
+  componentDidMount = () => {
     this.props.getTest(this.props.match.params.id);
-  }
-
+  };
+  //WARNING! To be deprecated in React v17. Use new lifecycle static getDerivedStateFromProps instead.
+  componentWillReceiveProps = nextProps => {
+    this.setState({
+      total: nextProps.test.questions.length,
+      length: nextProps.test.questions.length
+    });
+  };
   submitAnswer = isCorrect => {
     if (this.state.length >= 0) {
       if (!isCorrect) {
@@ -37,6 +40,7 @@ class TestMain extends Component {
   };
 
   render() {
+    console.log(this.state);
     const { testName, description, questions } = this.props.test;
 
     return (
