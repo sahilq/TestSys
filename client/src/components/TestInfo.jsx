@@ -108,9 +108,10 @@ class TestInfo extends Component {
             <div className="col">
               <h3 className="align-middle">Available Questions</h3>
               <ul>
-                {this.props.test.questions.map(question => (
-                  <QueDis key={question._id} question={question} />
-                ))}
+                {this.props.test.questions &&
+                  this.props.test.questions.map(question => (
+                    <QueDis key={question._id} question={question} />
+                  ))}
               </ul>
             </div>
           </div>

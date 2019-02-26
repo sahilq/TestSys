@@ -6,12 +6,35 @@ import * as actions from "../actions/actionCreators";
 import QueAttempt from "./QueAttempt";
 
 class TestMain extends Component {
+  state = {
+    qn: 0,
+    isCompleted: false,
+    total: this.props.test.questions.length,
+    score: 0,
+    length: this.props.test.questions.length
+  };
   componentDidMount() {
     if (this.props.role !== "participant") {
       return this.props.history.push("/");
     }
     this.props.getTest(this.props.match.params.id);
   }
+
+  submitAnswer = isCorrect => {
+    if (this.state.length >= 0) {
+      if (!isCorrect) {
+        this.setState({ length: this.state.length - 1, qn: this.state.qn + 1 });
+      } else {
+        this.setState({
+          score: this.state.score + 1,
+          length: this.state.length - 1,
+          qn: this.state.qn + 1
+        });
+      }
+    } else {
+      this.setState({ isCompleted: true });
+    }
+  };
 
   render() {
     const { testName, description, questions } = this.props.test;
@@ -22,18 +45,21 @@ class TestMain extends Component {
           Welcome To Test <small>{testName}</small>
         </h1>
         <h3>{description}</h3>
-        <div>
-          <ul>
-            {questions.map(question => (
-              <div key={question._id} className="border border-info">
-                <QueAttempt
-                  total={this.props.test.questions.length}
-                  question={question}
-                />
-              </div>
-            ))}
-          </ul>
-        </div>
+        {!this.state.isCompleted && questions[this.state.qn] ? (
+          <div>
+            <QueAttempt
+              question={questions[this.state.qn]}
+              submitAnswer={this.submitAnswer}
+            />
+          </div>
+        ) : (
+          <div>
+            <h1>Test Completed</h1>
+            <h3>
+              You have Scored {this.state.score}/{this.state.total}
+            </h3>
+          </div>
+        )}
       </div>
     );
   }

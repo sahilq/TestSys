@@ -11,10 +11,40 @@ class QueAttempt extends Component {
     });
   };
 
+  handleSubmit = () => {
+    if (this.state.answer !== "") {
+      if (this.state.answer === this.state.correct) {
+        let isCorrect = true;
+        this.props.submitAnswer(isCorrect);
+        this.setState({ answer: "" });
+      } else {
+        let isCorrect = false;
+        this.props.submitAnswer(isCorrect);
+        this.setState({ answer: "" });
+      }
+    } else {
+      alert("No Answer Provided");
+    }
+  };
+
+  //WARNING! To be deprecated in React v17. Use new lifecycle static getDerivedStateFromProps instead.
+  componentWillReceiveProps(nextProps) {
+    this.setState({ correct: nextProps.question.answer });
+  }
+
   render() {
+    console.log(this.state);
     const { question } = this.props;
+
     return (
-      <div className="container">
+      <div
+        className="container p-2"
+        style={{
+          backgroundImage:
+            "linear-gradient(to right,hsl(0, 100%, 70%) , hsla(120, 100%, 75%, 0.3))",
+          borderRadius: 7
+        }}
+      >
         <div className="row">
           <div className="col">
             <table>
@@ -37,7 +67,13 @@ class QueAttempt extends Component {
                         onChange={this.handleOptions}
                         value={question.option1}
                       />
-                      <span>{question.option1}</span>
+                      <button
+                        className="btn btn-sm btn-light p-1 m-1"
+                        onClick={this.handleOptions}
+                        value={question.option1}
+                      >
+                        {question.option1}
+                      </button>
                     </div>
 
                     <div>
@@ -47,7 +83,13 @@ class QueAttempt extends Component {
                         onChange={this.handleOptions}
                         value={question.option2}
                       />
-                      <span>{question.option2}</span>
+                      <button
+                        className="btn btn-sm btn-light p-1 m-1"
+                        onClick={this.handleOptions}
+                        value={question.option2}
+                      >
+                        {question.option2}
+                      </button>
                     </div>
                   </td>
                   <td>
@@ -58,7 +100,13 @@ class QueAttempt extends Component {
                         onChange={this.handleOptions}
                         value={question.option3}
                       />
-                      <span>{question.option3}</span>
+                      <button
+                        className="btn btn-sm btn-light p-1 m-1"
+                        onClick={this.handleOptions}
+                        value={question.option3}
+                      >
+                        {question.option3}
+                      </button>
                     </div>
 
                     <div>
@@ -68,12 +116,19 @@ class QueAttempt extends Component {
                         onChange={this.handleOptions}
                         value={question.option4}
                       />
-                      <span>{question.option4}</span>
+                      <button
+                        className="btn btn-sm btn-light p-1 m-1"
+                        onClick={this.handleOptions}
+                        value={question.option4}
+                      >
+                        {question.option4}
+                      </button>
                     </div>
                   </td>
                 </tr>
               </tbody>
             </table>
+            <button onClick={this.handleSubmit}>Submit</button>
           </div>
         </div>
       </div>
