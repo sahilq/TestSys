@@ -15,9 +15,7 @@ function* svAuthInfo(data) {
 
 //Remove auth info from Local Storage
 function* rmAuthInfo() {
-  yield localStorage.removeItem("JWT_TOKEN");
-  yield localStorage.removeItem("USER");
-  yield localStorage.removeItem("TEST_ID");
+  yield localStorage.clear();
 }
 
 //Sign Up
