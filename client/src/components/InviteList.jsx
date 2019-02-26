@@ -11,7 +11,7 @@ class InviteList extends Component {
   }
 
   handleClick = e => {
-    console.log(e.target.value);
+    this.props.startTest(e.target.value);
   };
 
   render() {

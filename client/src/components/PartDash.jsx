@@ -5,6 +5,11 @@ import InviteList from "./InviteList";
 
 class PartDash extends Component {
   state = {};
+
+  startTest = id => {
+    this.props.history.push("/teststart/" + id);
+  };
+
   render() {
     return (
       <div className="container">
@@ -13,8 +18,11 @@ class PartDash extends Component {
             <h1>
               Hello,<small>{this.props.userName}</small>
             </h1>
-            <InviteList participantId={this.props.userId} />
-          </div>{" "}
+            <InviteList
+              participantId={this.props.userId}
+              startTest={this.startTest}
+            />
+          </div>
           <div className="col" />
         </div>
       </div>
