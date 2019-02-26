@@ -3,11 +3,9 @@ import { connect } from "react-redux";
 
 import * as actions from "../actions/actionCreators";
 
-class TestMain extends Component {
-  state = {
-    nq: 0
-  };
+import QueAttempt from "./QueAttempt";
 
+class TestMain extends Component {
   componentDidMount() {
     if (this.props.role !== "participant") {
       return this.props.history.push("/");
@@ -15,25 +13,27 @@ class TestMain extends Component {
     this.props.getTest(this.props.match.params.id);
   }
 
-  showQue = () => {
-    const questions = this.props.test.questions;
-    this.setState({ nq: this.state.nq + 1 });
-    if (questions[this.state.nq]) {
-      console.log(questions[this.state.nq]);
-    } else {
-      console.log("Questions finished");
-    }
-  };
-
   render() {
     const { testName, description, questions } = this.props.test;
+
     return (
       <div>
         <h1>
           Welcome To Test <small>{testName}</small>
         </h1>
         <h3>{description}</h3>
-        <button onClick={this.showQue}>Log</button>
+        <div>
+          <ul>
+            {questions.map(question => (
+              <div key={question._id} className="border border-info">
+                <QueAttempt
+                  total={this.props.test.questions.length}
+                  question={question}
+                />
+              </div>
+            ))}
+          </ul>
+        </div>
       </div>
     );
   }
