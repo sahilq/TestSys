@@ -28,6 +28,7 @@ class InviteBox extends Component {
                     <div className="p-1">
                       <CreateInvite
                         test={test}
+                        partEmail={this.props.location.state.partEmail}
                         participantId={this.props.location.state.detail}
                       />
                     </div>

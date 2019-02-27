@@ -33,7 +33,6 @@ class QueAttempt extends Component {
   }
 
   render() {
-    console.log(this.state);
     const { question } = this.props;
 
     return (
@@ -54,73 +53,76 @@ class QueAttempt extends Component {
                 </tr>
                 <tr>
                   <th>Options:</th>
-                  <th>Options:</th>
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>
+                <tr className="row">
+                  <td className="col">
                     <div>
-                      <input
-                        checked={this.state.answer === question.option1}
-                        type="radio"
-                        onChange={this.handleOptions}
-                        value={question.option1}
-                      />
                       <button
-                        className="btn btn-sm btn-light p-1 m-1"
+                        className="btn btn-sm btn-light m-1 btn-block"
                         onClick={this.handleOptions}
                         value={question.option1}
                       >
+                        <input
+                          checked={this.state.answer === question.option1}
+                          type="radio"
+                          className="float-left mr-auto mt-1 p-0"
+                          onChange={this.handleOptions}
+                          value={question.option1}
+                        />
                         {question.option1}
                       </button>
                     </div>
 
                     <div>
-                      <input
-                        checked={this.state.answer === question.option2}
-                        type="radio"
-                        onChange={this.handleOptions}
-                        value={question.option2}
-                      />
                       <button
-                        className="btn btn-sm btn-light p-1 m-1"
+                        className="btn btn-sm btn-light p-1 m-1 btn-block"
                         onClick={this.handleOptions}
                         value={question.option2}
                       >
+                        <input
+                          checked={this.state.answer === question.option2}
+                          type="radio"
+                          className="float-left mr-auto mt-1 p-0"
+                          onChange={this.handleOptions}
+                          value={question.option2}
+                        />
                         {question.option2}
                       </button>
                     </div>
                   </td>
-                  <td>
+                  <td className="col">
                     <div>
-                      <input
-                        checked={this.state.answer === question.option3}
-                        type="radio"
-                        onChange={this.handleOptions}
-                        value={question.option3}
-                      />
                       <button
-                        className="btn btn-sm btn-light p-1 m-1"
+                        className="btn btn-sm btn-light p-1 m-1 btn-block"
                         onClick={this.handleOptions}
                         value={question.option3}
                       >
+                        <input
+                          checked={this.state.answer === question.option3}
+                          type="radio"
+                          className="float-left mr-auto mt-1 p-0"
+                          onChange={this.handleOptions}
+                          value={question.option3}
+                        />
                         {question.option3}
                       </button>
                     </div>
 
                     <div>
-                      <input
-                        checked={this.state.answer === question.option4}
-                        type="radio"
-                        onChange={this.handleOptions}
-                        value={question.option4}
-                      />
                       <button
-                        className="btn btn-sm btn-light p-1 m-1"
+                        className="btn btn-sm btn-light p-1 m-1 btn-block"
                         onClick={this.handleOptions}
                         value={question.option4}
                       >
+                        <input
+                          checked={this.state.answer === question.option4}
+                          type="radio"
+                          className="float-left mr-auto mt-1 p-0"
+                          onChange={this.handleOptions}
+                          value={question.option4}
+                        />
                         {question.option4}
                       </button>
                     </div>

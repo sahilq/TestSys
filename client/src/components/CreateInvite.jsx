@@ -12,7 +12,7 @@ class CreateInvite extends Component {
       participantId: this.props.participantId,
       testName: e.target.id
     };
-    console.log(e.target);
+
     this.props.createInv(data);
   };
 

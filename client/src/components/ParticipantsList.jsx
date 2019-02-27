@@ -11,7 +11,7 @@ class ParticipantsList extends Component {
     this.props.history.push({
       pathname: "/invite",
 
-      state: { detail: e.target.value }
+      state: { detail: e.target.value, partEmail: e.target.id }
     });
   };
 
@@ -28,6 +28,7 @@ class ParticipantsList extends Component {
                     <button
                       onClick={this.handleClick}
                       value={part._id}
+                      id={part.email}
                       className="btn-sm btn-primary m-1 p-1"
                     >
                       Invite

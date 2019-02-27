@@ -138,3 +138,9 @@ export const fetchInvites = payload => ({
   type: types.GET_INVITES,
   payload
 });
+
+//set Invite Code
+export const setInviteCode = payload => ({
+  type: types.SET_INVITE_CODE,
+  payload
+});

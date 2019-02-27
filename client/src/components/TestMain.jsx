@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import jwt_decode from "jwt-decode";
 
 import * as actions from "../actions/actionCreators";
 
@@ -13,11 +14,25 @@ class TestMain extends Component {
     score: 0,
     length: 0
   };
+
+  inviteCode = code => {
+    if (code) {
+      const token = jwt_decode(code);
+      if (token.sub !== this.props.userId) {
+        return this.props.history.push("/");
+      }
+    }
+  };
+
   componentDidMount = () => {
+    if (!this.props.inviteCode) {
+      return this.props.history.push("/");
+    }
     this.props.getTest(this.props.match.params.id);
   };
   //WARNING! To be deprecated in React v17. Use new lifecycle static getDerivedStateFromProps instead.
   componentWillReceiveProps = nextProps => {
+    this.inviteCode(nextProps.inviteCode);
     this.setState({
       total: nextProps.test.questions.length,
       length: nextProps.test.questions.length
@@ -40,7 +55,6 @@ class TestMain extends Component {
   };
 
   render() {
-    console.log(this.state);
     const { testName, description, questions } = this.props.test;
 
     return (
@@ -72,7 +86,9 @@ function mapStateToProps(state) {
   return {
     isAutn: state.auth.isAuthenticated,
     role: state.auth.role,
-    test: state.test.test
+    userId: state.auth.userId,
+    test: state.test.test,
+    inviteCode: state.invite.inviteCode
   };
 }
 function mapDispatchToProps(dispatch) {

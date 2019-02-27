@@ -11,6 +11,7 @@ class InviteList extends Component {
   }
 
   handleClick = e => {
+    this.props.setInvite(e.target.id);
     this.props.startTest(e.target.value);
   };
 
@@ -30,10 +31,10 @@ class InviteList extends Component {
                     <button
                       onClick={this.handleClick}
                       value={invite.testId}
+                      id={invite.inviteCode}
                       className="btn btn-link p-1 m-1 ml-5"
                     >
-                      {invite._id}/{invite.testId}?_
-                      {this.props.participantId}
+                      Attempt This Test
                     </button>
                   </div>
                 </li>
@@ -55,6 +56,7 @@ function mapStateToProps(state) {
 }
 function mapDispatchToProps(dispatch) {
   return {
+    setInvite: inviteCode => dispatch(actions.setInviteCode(inviteCode)),
     getInvites: participantId => dispatch(actions.fetchInvites(participantId))
   };
 }
