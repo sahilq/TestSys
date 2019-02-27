@@ -3,6 +3,8 @@ import { fork, takeLatest, all } from "redux-saga/effects";
 import * as auth from "./authSaga";
 import * as test from "./testSaga";
 import * as invite from "./invSaga";
+import * as score from "./scoreSaga";
+
 import * as types from "../actions/types";
 
 //Authentication Watcher Saga
@@ -28,7 +30,7 @@ function* testSaga() {
     yield takeLatest(types.EDIT_QUE, test.editQueSaga)
   ]);
 }
-
+//invite watcher saga
 function* invSaga() {
   yield all([
     yield takeLatest(types.CREATE_INVITE, invite.createInvSaga),
@@ -36,7 +38,20 @@ function* invSaga() {
   ]);
 }
 
+//score watcher saga
+function* scoreSaga() {
+  yield all([
+    yield takeLatest(types.SAVE_SCORE, score.saveScore),
+    yield takeLatest(types.FETCH_SCORES, score.fetchScores)
+  ]);
+}
+
 //Root SAGA
 export default function* mySaga() {
-  yield all([yield fork(authSaga), yield fork(testSaga), yield fork(invSaga)]);
+  yield all([
+    yield fork(authSaga),
+    yield fork(testSaga),
+    yield fork(invSaga),
+    yield fork(scoreSaga)
+  ]);
 }

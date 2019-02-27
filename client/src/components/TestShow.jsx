@@ -1,15 +1,17 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-import { fetchTests } from "../actions/actionCreators";
+import { fetchTests, fetchScores } from "../actions/actionCreators";
 
 import ParticipantsList from "./ParticipantsList";
+import MarksList from "./MarksList";
 
 class TestShow extends Component {
   componentWillMount = () => {
     const userId = this.props.userId;
 
     this.props.fetchTestsAll(userId);
+    this.props.fetchScores();
   };
 
   handleClick = e => {
@@ -48,7 +50,11 @@ class TestShow extends Component {
             <h3>List of registered participants</h3>
             <ParticipantsList history={this.props.history} />
           </div>
-          <div className="col">{/* Marks wise Participants list */}</div>
+          <div className="col">
+            {/* Marks wise Participants list */}
+            <h3>Marks/Participants List</h3>
+            <MarksList scoresList={this.props.scoresList} />
+          </div>
         </div>
       </div>
     );
@@ -57,12 +63,14 @@ class TestShow extends Component {
 function mapStateToProps(state) {
   return {
     tests: state.test.tests,
-    userId: state.auth.userId
+    userId: state.auth.userId,
+    scoresList: state.score.scoresList
   };
 }
 function mapDispatchToProps(dispatch) {
   return {
-    fetchTestsAll: userId => dispatch(fetchTests(userId))
+    fetchTestsAll: userId => dispatch(fetchTests(userId)),
+    fetchScores: () => dispatch(fetchScores())
   };
 }
 

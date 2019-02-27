@@ -24,6 +24,9 @@ export default function testReducer(state = initialState, action) {
   if (action.type === types.TEST_EDIT_SUCCESS) {
     return { ...newState, test: { ...action.payload } };
   }
+  if (action.type === types.SIGN_OUT_SUCCESS) {
+    return { ...newState, testActive: false, testId: "", tests: [], test: {} };
+  }
   return newState;
 }
 

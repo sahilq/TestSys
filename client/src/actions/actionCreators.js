@@ -144,3 +144,21 @@ export const setInviteCode = payload => ({
   type: types.SET_INVITE_CODE,
   payload
 });
+
+//set invite Id
+export const setInviteId = payload => ({
+  type: types.CURRENT_INVITE_ID,
+  payload
+});
+
+//save score in db
+export const saveScore = payload => ({
+  type: types.SAVE_SCORE,
+  payload
+});
+
+//fetch all scores
+export const fetchScores = payload => ({
+  type: types.FETCH_SCORES,
+  payload
+});

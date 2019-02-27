@@ -25,7 +25,6 @@ class ShowQue extends Component {
       <div className="container border p-0 m-0">
         <div className="m-1 row">
           <div className="col-lg">
-            {" "}
             <h5 className="border-bottom border-info">
               Question:
               <i> {question}</i>

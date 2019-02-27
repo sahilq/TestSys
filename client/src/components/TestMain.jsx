@@ -15,7 +15,7 @@ class TestMain extends Component {
     length: 0
   };
 
-  inviteCode = code => {
+  inviteCodeVerify = code => {
     if (code) {
       const token = jwt_decode(code);
       if (token.sub !== this.props.userId) {
@@ -32,7 +32,7 @@ class TestMain extends Component {
   };
   //WARNING! To be deprecated in React v17. Use new lifecycle static getDerivedStateFromProps instead.
   componentWillReceiveProps = nextProps => {
-    this.inviteCode(nextProps.inviteCode);
+    this.inviteCodeVerify(nextProps.inviteCode);
     this.setState({
       total: nextProps.test.questions.length,
       length: nextProps.test.questions.length
@@ -54,6 +54,26 @@ class TestMain extends Component {
     }
   };
 
+  testCompleted = () => {
+    const inviteId = this.props.inviteId;
+    const score = this.state.score;
+    const userName = this.props.userName;
+    const participantId = this.props.userId;
+    const testId = this.props.test._id;
+    const total = this.state.total;
+    const testName = this.props.test.testName;
+    const data = {
+      total,
+      inviteId,
+      score,
+      userName,
+      testName,
+      participantId,
+      testId
+    };
+    this.props.saveScore(data);
+  };
+
   render() {
     const { testName, description, questions } = this.props.test;
 
@@ -73,6 +93,11 @@ class TestMain extends Component {
         ) : (
           <div>
             <h1>Test Completed</h1>
+            {/* function call */}
+            {this.state.qn !== 0 && this.state.qn === this.state.total
+              ? this.testCompleted()
+              : null}
+            {/* function call */}
             <h3>
               You have Scored {this.state.score}/{this.state.total}
             </h3>
@@ -87,13 +112,17 @@ function mapStateToProps(state) {
     isAutn: state.auth.isAuthenticated,
     role: state.auth.role,
     userId: state.auth.userId,
+    userName: state.auth.userName,
+
     test: state.test.test,
-    inviteCode: state.invite.inviteCode
+    inviteCode: state.invite.inviteCode,
+    inviteId: state.invite.currentInviteId
   };
 }
 function mapDispatchToProps(dispatch) {
   return {
-    getTest: id => dispatch(actions.getTest(id))
+    getTest: id => dispatch(actions.getTest(id)),
+    saveScore: data => dispatch(actions.saveScore(data))
   };
 }
 
