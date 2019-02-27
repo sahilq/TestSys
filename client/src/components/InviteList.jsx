@@ -31,6 +31,7 @@ class InviteList extends Component {
                     <button
                       onClick={this.handleClick}
                       value={invite.testId}
+                      onFocus={() => this.props.inviteId(invite._id)}
                       id={invite.inviteCode}
                       className="btn btn-link p-1 m-1 ml-5"
                     >
@@ -57,7 +58,8 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     setInvite: inviteCode => dispatch(actions.setInviteCode(inviteCode)),
-    getInvites: participantId => dispatch(actions.fetchInvites(participantId))
+    getInvites: participantId => dispatch(actions.fetchInvites(participantId)),
+    inviteId: id => dispatch(actions.setInviteId(id))
   };
 }
 
