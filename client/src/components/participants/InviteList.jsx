@@ -12,12 +12,14 @@ class InviteList extends Component {
 
   handleClick = e => {
     console.log(e.currentTarget.getAttribute("time"));
-    this.props.setInvite(e.target.id);
-    this.props.inviteId(e.target.title);
+
+    this.props.setInvite(e.target.title);
+    this.props.inviteId(e.target.id);
     this.props.startTest(e.target.value);
   };
 
   render() {
+    let dateNow = new Date(Date.now());
     return (
       <div className="container">
         <div className="row">
@@ -31,16 +33,30 @@ class InviteList extends Component {
                       {invite.testName}
                     </span>
                     <button
+                      disabled={new Date(invite.date) > dateNow ? true : false} //if test date is bigger than current date test link is disabled
                       onClick={this.handleClick}
                       value={invite.testId}
-                      title={invite._id}
+                      id={invite._id}
+                      date={invite.date}
                       time={invite.time}
-                      id={invite.inviteCode}
+                      title={invite.inviteCode}
                       className="btn btn-link p-1 m-1 ml-5"
                     >
-                      Attempt This Test
+                      {new Date(invite.date) < dateNow
+                        ? "Attempt Test"
+                        : "Available From: " +
+                          new Date(invite.date).toLocaleString()}
                     </button>
-                    <small>Time available :{invite.time}s</small>
+                    <p>
+                      <small>
+                        Time available: {Math.floor(invite.time / (60 * 60))}
+                        {" hour/s "}
+                        {Math.floor((invite.time % (60 * 60)) / 60)}
+                        {" minute/s "}
+                        {Math.ceil((invite.time % (60 * 60)) % 60)}
+                        {" second/s"}
+                      </small>
+                    </p>
                   </div>
                 </li>
               ))}
