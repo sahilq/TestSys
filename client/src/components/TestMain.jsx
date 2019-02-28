@@ -5,6 +5,7 @@ import jwt_decode from "jwt-decode";
 import * as actions from "../actions/actionCreators";
 
 import QueAttempt from "./QueAttempt";
+import Timer from "./Timer";
 
 class TestMain extends Component {
   state = {
@@ -82,7 +83,10 @@ class TestMain extends Component {
         <h1>
           Welcome To Test <small>{testName}</small>
         </h1>
-        <h3>{description}</h3>
+        <div>
+          <h3>{description}</h3>
+          <Timer />
+        </div>
         {!this.state.isCompleted && questions[this.state.qn] ? (
           <div>
             <QueAttempt

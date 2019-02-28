@@ -6,24 +6,43 @@ import * as actions from "../actions/actionCreators";
 class CreateInvite extends Component {
   state = {
     date: Date,
-    isDate: false
+    time: Number,
+    isDate: false,
+    isTime: false
   };
 
   handleClick = e => {
-    if (!this.state.isDate) return alert("provide Date");
-    if (this.state.date < Date.now()) return alert("invalid date");
+    if (!this.state.isDate || !this.state.isTime) {
+      return alert("provide Date and time");
+    }
+    if (this.state.date < new Date(Date.now())) {
+      return alert("Test Date cannot be less than Today's Date");
+    }
     const data = {
       testId: e.target.value,
       participantId: this.props.participantId,
-      testName: e.target.id
+      testName: e.target.id,
+      time: this.state.time,
+      date: this.state.date
     };
+    // this.setState({ isDate: false, isTime: false });
 
     this.props.createInv(data);
   };
   onDateChange = e => {
-    console.log(e.target.value);
-    this.setState({ isDate: true });
+    let date = new Date(e.target.value);
+    // let dateToday = new Date(Date.now());
+    this.setState({ date });
+    if (e.target.value) this.setState({ isDate: true });
   };
+
+  handleTime = e => {
+    let time = e.target.value;
+    let p = time.split(":");
+    time = +p[0] * 60 * 60 + +p[1] * 60;
+    this.setState({ time: time, isTime: true });
+  };
+
   render() {
     //Array that contains testIds of Invites for a Particular Participant
     let invitedTo = this.props.invitedTo;
@@ -47,9 +66,15 @@ class CreateInvite extends Component {
               ) : (
                 <div>
                   <input
+                    min={Date.now()}
                     type="datetime-local"
                     required={true}
                     onChange={this.onDateChange}
+                  />
+                  <input
+                    type="time"
+                    onChange={this.handleTime}
+                    required={true}
                   />
                   <button
                     className="btn btn-link float-right"

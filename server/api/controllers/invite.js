@@ -17,11 +17,15 @@ signtoken = id => {
 
 module.exports = {
   createInvite: async (req, res, next) => {
-    const { testId, participantId, testName } = req.body;
+    let date = new Date(req.body.date);
+
+    const { testId, participantId, testName, time } = req.body;
     let inviteCode = await signtoken(participantId);
 
     let invite = await new Invite({
       testId,
+      time,
+      date,
       participantId,
       testName,
       inviteCode
@@ -29,7 +33,7 @@ module.exports = {
     await invite.save();
     let invites = await Invite.find({ participantId: participantId });
     console.log(invites);
-    res.json(invites).status(200);
+    res.json(invites).status(201);
   },
   getInvites: async (req, res, next) => {
     let invites = await Invite.find({ participantId: req.params.userId });

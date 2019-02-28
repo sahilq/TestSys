@@ -5,7 +5,9 @@ const inviteSchema = new Schema({
   participantId: { type: mongoose.Schema.Types.ObjectId, required: true },
   testId: { type: mongoose.Schema.Types.ObjectId, required: true },
   testName: { type: String, required: true },
-  inviteCode: { type: String, required: true }
+  inviteCode: { type: String, required: true },
+  time: { type: Number, required: true },
+  date: { type: Date, required: true }
 });
 
 const Invite = mongoose.model("invite", inviteSchema);
