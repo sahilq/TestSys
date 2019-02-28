@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-import { getParticipants } from "../actions/actionCreators";
+import { getParticipants } from "../../actions/actionCreators";
 
 class ParticipantsList extends Component {
   componentDidMount = () => {
@@ -24,15 +24,17 @@ class ParticipantsList extends Component {
               {this.props.parts &&
                 this.props.parts.map(part => (
                   <li key={part._id}>
-                    {part.name}
-                    <button
-                      onClick={this.handleClick}
-                      value={part._id}
-                      id={part.email}
-                      className="btn-sm btn-primary m-1 p-1"
-                    >
-                      Invite
-                    </button>
+                    <p>
+                      {part.name}
+                      <button
+                        onClick={this.handleClick}
+                        value={part._id}
+                        id={part.email}
+                        className="btn-sm btn-primary p-1 float-right "
+                      >
+                        Invite
+                      </button>
+                    </p>
                   </li>
                 ))}
             </ul>

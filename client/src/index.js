@@ -12,12 +12,12 @@ import App from "./components/App";
 import Home from "./components/Home";
 import SignIn from "./components/SignIn";
 import SignUp from "./components/SignUp";
-import TestInit from "./components/TestInit";
-import TestMain from "./components/TestMain";
-import TestInfo from "./components/TestInfo";
-import TestShow from "./components/TestShow";
-import PartDash from "./components/PartDash";
-import InviteBox from "./components/InviteBox";
+import TestInit from "./components/recruiter/TestInit";
+import TestMain from "./components/participants/TestMain";
+import TestInfo from "./components/recruiter/TestInfo";
+import TestShow from "./components/recruiter/TestShow";
+import PartDash from "./components/participants/PartDash";
+import InviteBox from "./components/recruiter/InviteBox";
 import * as serviceWorker from "./serviceWorker";
 //HOCs
 // import authGuard from "./components/HOCs/authGuard";

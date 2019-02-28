@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import jwt_decode from "jwt-decode";
 
-import * as actions from "../actions/actionCreators";
+import * as actions from "../../actions/actionCreators";
 
 import QueAttempt from "./QueAttempt";
 import Timer from "./Timer";

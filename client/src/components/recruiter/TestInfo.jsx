@@ -3,19 +3,16 @@ import { connect } from "react-redux";
 
 import QueAdd from "./QueAdd";
 import QueDis from "./QueDis";
-import * as actions from "../actions/actionCreators";
+import * as actions from "../../actions/actionCreators";
+
 class TestInfo extends Component {
-  componentDidMount = () => {
-    console.log(this.props.match.params.testId);
-  };
   state = {
     isEditing: false,
     testName: "",
     description: ""
   };
-
   componentDidMount = () => {
-    let id = this.props.match.params.testId;
+    let id = this.props.location.state.detail;
     localStorage.setItem("TEST_ID", id);
     this.props.getTest(id);
   };
@@ -70,10 +67,8 @@ class TestInfo extends Component {
   };
 
   render() {
-    console.log(this.props);
     return (
       <div className="container">
-        <h1>Rendered</h1>
         {!this.state.isEditing ? (
           <div className="row">
             <div className="col">
@@ -113,9 +108,10 @@ class TestInfo extends Component {
             <div className="col">
               <h3 className="align-middle">Available Questions</h3>
               <ul>
-                {this.props.test.questions.map(question => (
-                  <QueDis key={question._id} question={question} />
-                ))}
+                {this.props.test.questions &&
+                  this.props.test.questions.map(question => (
+                    <QueDis key={question._id} question={question} />
+                  ))}
               </ul>
             </div>
           </div>
@@ -161,8 +157,13 @@ class TestInfo extends Component {
     );
   }
 }
+
 function mapStateToProps(state) {
-  return { testId: state.test.testId, test: state.test.test };
+  return {
+    testId: state.test.testId,
+    test: state.test.test,
+    userId: state.auth.userId
+  };
 }
 //
 function mapDispatchToProps(dispatch) {

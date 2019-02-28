@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-import { fetchTests } from "../actions/actionCreators";
+import { fetchTests } from "../../actions/actionCreators";
 
 class RecHome extends Component {
   state = {};

@@ -3,7 +3,6 @@ import React, { Component } from "react";
 class MarksList extends Component {
   state = {};
   render() {
-    console.log(this.props);
     return (
       <div className="container">
         <div className="row">
@@ -13,9 +12,9 @@ class MarksList extends Component {
                 <tr className="row">
                   <th className="col">Test Name:</th>
                   <th className="col">Participant's Name:</th>
-                  <th className="col">Total:</th>
 
                   <th className="col">Score:</th>
+                  <th className="col">Total:</th>
                 </tr>
               </thead>
               <tbody>
@@ -23,8 +22,9 @@ class MarksList extends Component {
                   <tr className="row border-bottom" key={score._id}>
                     <td className="col d-block">{score.testName}</td>
                     <td className="col d-block">{score.userName}</td>
-                    <td className="col d-block">{score.total}</td>
                     <td className="col d-block">{score.score}</td>
+
+                    <td className="col d-block">{score.total}</td>
                   </tr>
                 ))}
               </tbody>

@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-import * as actions from "../actions/actionCreators";
+import * as actions from "../../actions/actionCreators";
 
-class QueAdd extends Component {
+class EditQue extends Component {
   state = {
     question: "",
     answer: "",
@@ -16,9 +16,8 @@ class QueAdd extends Component {
   handleChange = e => {
     this.setState({ [e.target.id]: e.target.value });
   };
-
-  checkOptions = () => {
-    const { option1, option2, option3, option4, answer } = this.state;
+  checkOptions = question => {
+    const { option1, option2, option3, option4, answer } = question;
     if (
       answer === option1 ||
       answer === option2 ||
@@ -40,23 +39,50 @@ class QueAdd extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    let check = this.checkOptions();
-    if (check) {
-      const question = this.state;
-      const id = this.props.testId;
-      const data = { id, question };
-      this.props.queAdd(data);
-      this.setState({
-        question: "",
-        answer: "",
-        option1: "",
-        option2: "",
-        option3: "",
-        option4: ""
-      });
-    } else {
-      alert("Re-check Options");
+    const question = {
+      question: "",
+      answer: "",
+      option1: "",
+      option2: "",
+      option3: "",
+      option4: ""
+    };
+
+    for (let prop in question) {
+      if (this.state[prop] !== "") {
+        question[prop] = this.state[prop];
+      } else {
+        question[prop] = this.props.question[prop];
+      }
     }
+
+    let check = this.checkOptions(question);
+    if (check) {
+      const testId = this.props.testId;
+      const id = this.props.question._id;
+      //api req to edit question
+      const payload = {
+        id,
+        testId,
+        question
+      };
+      this.props.queEdit(payload);
+
+      this.props.editToggle();
+    } else {
+      alert(
+        "Note:\n1:-Option Should not match Each Other.\n2:-Only One Option Should Match Answer.\n3:- One Option Must Match Answer."
+      );
+      this.props.editToggle();
+    }
+    this.setState({
+      question: "",
+      answer: "",
+      option1: "",
+      option2: "",
+      option3: "",
+      option4: ""
+    });
   };
 
   render() {
@@ -64,7 +90,7 @@ class QueAdd extends Component {
       <div className="container ">
         <div className="row">
           <div className="col">
-            <h3>ADD QUESTION:</h3>
+            <h3>EDIT QUESTION:</h3>
           </div>{" "}
         </div>
         <div className="row">
@@ -74,11 +100,10 @@ class QueAdd extends Component {
                 <input
                   className="form-control input-lg"
                   type="text"
-                  placeholder="Question ?"
+                  placeholder={this.props.question.question}
                   value={this.state.question}
                   id="question"
                   onChange={this.handleChange}
-                  required={true}
                   autoComplete="off"
                 />
               </div>
@@ -86,42 +111,38 @@ class QueAdd extends Component {
                 <input
                   className="m-1 "
                   id="option1"
-                  required={true}
                   onChange={this.handleChange}
                   type="text"
                   autoComplete="off"
-                  placeholder="Option 1"
+                  placeholder={this.props.question.option1}
                   value={this.state.option1}
                 />
                 <input
                   className="m-1"
                   id="option2"
-                  required={true}
                   onChange={this.handleChange}
                   type="text"
                   autoComplete="off"
                   value={this.state.option2}
-                  placeholder="Option 2"
+                  placeholder={this.props.question.option2}
                 />{" "}
                 <input
                   className="m-1"
                   id="option3"
-                  required={true}
                   autoComplete="off"
                   value={this.state.option3}
                   onChange={this.handleChange}
                   type="text"
-                  placeholder="Option 3"
+                  placeholder={this.props.question.option3}
                 />
                 <input
                   className="m-1"
                   id="option4"
-                  required={true}
                   autoComplete="off"
                   value={this.state.option4}
                   onChange={this.handleChange}
                   type="text"
-                  placeholder="Option 4"
+                  placeholder={this.props.question.option4}
                 />
               </div>
               <div className="form-row ml-auto">
@@ -129,20 +150,25 @@ class QueAdd extends Component {
                 <input
                   className="m-1"
                   id="answer"
-                  required={true}
                   autoComplete="off"
                   onChange={this.handleChange}
                   value={this.state.answer}
                   type="text"
-                  placeholder="Answer"
+                  placeholder={this.props.question.answer}
                 />
                 <input
                   type="submit"
-                  value="Add"
+                  value="Change"
                   className="btn btn-primary btn-sm m-1"
                 />
               </div>
             </form>
+            <button
+              className="btn btn-sm btn-info m-1"
+              onClick={this.props.editToggle}
+            >
+              &#8592; Back
+            </button>
           </div>
         </div>
       </div>
@@ -151,15 +177,17 @@ class QueAdd extends Component {
 }
 
 function mapstateToProps(state) {
-  return {};
+  return {
+    testId: state.test.testId
+  };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    queAdd: data => dispatch(actions.addQue(data))
+    queEdit: payload => dispatch(actions.editQue(payload))
   };
 }
 export default connect(
   mapstateToProps,
   mapDispatchToProps
-)(QueAdd);
+)(EditQue);

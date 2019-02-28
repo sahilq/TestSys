@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-import * as actions from "../actions/actionCreators";
+import * as actions from "../../actions/actionCreators";
 import CreateInvite from "./CreateInvite";
 
 class InviteBox extends Component {
@@ -15,6 +15,10 @@ class InviteBox extends Component {
   handleBack = () => {
     this.props.history.push("/testshow");
   };
+
+  componentWillUnmount() {
+    this.props.history.push("/");
+  }
 
   render() {
     return (

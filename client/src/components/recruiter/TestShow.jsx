@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-import { fetchTests, fetchScores } from "../actions/actionCreators";
+import { fetchTests, fetchScores } from "../../actions/actionCreators";
 
 import ParticipantsList from "./ParticipantsList";
 import MarksList from "./MarksList";

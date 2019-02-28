@@ -8,7 +8,6 @@ const inviteUri = "http://localhost:5000/invite";
 export function* createInvSaga(action) {
   try {
     const res = yield axios.post(`${inviteUri}/createinvite`, action.payload);
-    console.log(res.data);
     yield put({ type: types.INVITE_SUCCESS, payload: res.data });
   } catch (err) {
     console.error(err);

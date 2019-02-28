@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-import * as actions from "../actions/actionCreators";
+import * as actions from "../../actions/actionCreators";
 
 class InviteList extends Component {
   state = {};
@@ -11,7 +11,9 @@ class InviteList extends Component {
   }
 
   handleClick = e => {
+    console.log(e.currentTarget.getAttribute("time"));
     this.props.setInvite(e.target.id);
+    this.props.inviteId(e.target.title);
     this.props.startTest(e.target.value);
   };
 
@@ -31,12 +33,14 @@ class InviteList extends Component {
                     <button
                       onClick={this.handleClick}
                       value={invite.testId}
-                      onFocus={() => this.props.inviteId(invite._id)}
+                      title={invite._id}
+                      time={invite.time}
                       id={invite.inviteCode}
                       className="btn btn-link p-1 m-1 ml-5"
                     >
                       Attempt This Test
                     </button>
+                    <small>Time available :{invite.time}s</small>
                   </div>
                 </li>
               ))}
