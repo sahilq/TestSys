@@ -23,7 +23,7 @@ module.exports = {
     console.log(score, testId, userName, participantId, testName);
     console.log(req.body.inviteId);
     await Invite.findByIdAndRemove(req.body.inviteId);
-    res.json(savedScore).status(200);
+    res.json(savedScore).status(201);
   },
   getAllScores: async (req, res, next) => {
     const scores = await Score.find().select("userName testName score total");

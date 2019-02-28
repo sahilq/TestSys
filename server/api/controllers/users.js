@@ -38,7 +38,7 @@ module.exports = {
       role: newUser.role
     };
     //respond with token
-    res.status(200).json({ token, user });
+    res.status(201).json({ token, user });
   },
   signIn: async (req, res, next) => {
     //generate web token
@@ -63,10 +63,10 @@ module.exports = {
   },
   getAll: async (req, res, next) => {
     const users = await User.find();
-    res.json(users).status(201);
+    res.json(users).status(200);
   },
   getParts: async (req, res, next) => {
     const users = await User.find({ role: "participant" });
-    res.json(users).status(201);
+    res.json(users).status(200);
   }
 };

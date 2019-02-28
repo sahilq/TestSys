@@ -11,7 +11,7 @@ module.exports = {
       });
     }
     await newTest.save();
-    res.json(newTest).status(200);
+    res.json(newTest).status(201);
   },
   gettest: async (req, res, next) => {
     const test = await Test.findById(req.params._id);
@@ -21,7 +21,7 @@ module.exports = {
   getall: async (req, res, next) => {
     try {
       const tests = await Test.find(req.params);
-      res.json(tests).status(201);
+      res.json(tests).status(200);
     } catch (CastError) {
       res.json({ message: "Cast Error" }).status(300);
     }
@@ -42,7 +42,7 @@ module.exports = {
     let question = new Question(req.body);
     test.questions.push(question);
     await test.save();
-    res.json(test).status(200);
+    res.json(test).status(201);
   },
   delQue: async (req, res, next) => {
     const test = await Test.findById(req.params._id);
