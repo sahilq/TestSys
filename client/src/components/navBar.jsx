@@ -22,7 +22,7 @@ class Header extends Component {
             "linear-gradient(141deg, #9fb8ad 0%, #1fc8db 51%, #2cb5e8 75%)"
         }}
       >
-        <Link className="navbar-brand" to="/">
+        <Link className="navbar-brand text-white" to="/">
           HOME
         </Link>
 
@@ -30,7 +30,7 @@ class Header extends Component {
           <ul className="navbar-nav mr-auto">
             {this.props.isAuth && this.props.role === "recruiter" ? (
               <li className="nav-item">
-                <Link className="nav-link" to="/testinit">
+                <Link className="nav-link text-white" to="/testinit">
                   Create Test
                 </Link>
               </li>
@@ -41,20 +41,24 @@ class Header extends Component {
             {!this.props.isAuth
               ? [
                   <li className="nav-item" key="signup">
-                    <Link className="nav-link" to="/signup">
+                    <Link className="nav-link text-white" to="/signup">
                       Sign Up
                     </Link>
                   </li>,
                   <li className="nav-item" key="signin">
-                    <Link className="nav-link" to="/signin">
+                    <Link className="nav-link text-white" to="/signin">
                       Sign In
                     </Link>
                   </li>
                 ]
               : null}
             {this.props.isAuth ? (
-              <li className="nav-item">
-                <Link className="nav-link" to="/signin" onClick={this.signOut}>
+              <li className="nav-item ">
+                <Link
+                  className="nav-link text-white"
+                  to="/signin"
+                  onClick={this.signOut}
+                >
                   Sign Out
                 </Link>
               </li>

@@ -3,7 +3,7 @@ import React from "react";
 class Timer extends React.Component {
   constructor() {
     super();
-    this.state = { time: {}, seconds: 3600 };
+    this.state = { time: {}, seconds: Number };
     this.timer = 0;
     this.startTimer = this.startTimer.bind(this);
     this.countDown = this.countDown.bind(this);
@@ -27,7 +27,8 @@ class Timer extends React.Component {
   }
 
   componentDidMount() {
-    let timeLeftVar = this.secondsToTime(this.state.seconds);
+    this.setState({ seconds: this.props.time });
+    let timeLeftVar = this.secondsToTime(this.props.time);
     this.setState({ time: timeLeftVar });
   }
   componentWillUnmount() {
@@ -51,6 +52,7 @@ class Timer extends React.Component {
     // Check if we're at zero.
     if (seconds === 0) {
       clearInterval(this.timer);
+      this.props.endTest();
     }
   }
 

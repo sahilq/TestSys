@@ -73,6 +73,7 @@ class TestMain extends Component {
       testId
     };
     this.props.saveScore(data);
+    this.setState({ isCompleted: true });
   };
 
   render() {
@@ -85,7 +86,7 @@ class TestMain extends Component {
         </h1>
         <div>
           <h3>{description}</h3>
-          <Timer />
+          <Timer time={this.props.time} endTest={this.testCompleted} />
         </div>
         {!this.state.isCompleted && questions[this.state.qn] ? (
           <div>
@@ -120,7 +121,9 @@ function mapStateToProps(state) {
 
     test: state.test.test,
     inviteCode: state.invite.inviteCode,
-    inviteId: state.invite.currentInviteId
+    inviteId: state.invite.currentInviteId,
+
+    time: state.invite.time
   };
 }
 function mapDispatchToProps(dispatch) {

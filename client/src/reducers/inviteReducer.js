@@ -3,7 +3,8 @@ import * as types from "../actions/types";
 const initialState = {
   invitedTo: [],
   inviteCode: "",
-  currentInviteId: ""
+  currentInviteId: "",
+  time: Number
 };
 
 export default (state = initialState, { type, payload }) => {
@@ -14,6 +15,8 @@ export default (state = initialState, { type, payload }) => {
       return { ...state, inviteCode: payload };
     case types.CURRENT_INVITE_ID:
       return { ...state, currentInviteId: payload };
+    case types.SET_TIMER:
+      return { ...state, time: payload };
     default:
       return state;
   }

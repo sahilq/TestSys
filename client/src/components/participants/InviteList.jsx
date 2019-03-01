@@ -12,7 +12,7 @@ class InviteList extends Component {
 
   handleClick = e => {
     console.log(e.currentTarget.getAttribute("time"));
-
+    this.props.setTimer(e.currentTarget.getAttribute("time"));
     this.props.setInvite(e.target.title);
     this.props.inviteId(e.target.id);
     this.props.startTest(e.target.value);
@@ -79,7 +79,8 @@ function mapDispatchToProps(dispatch) {
   return {
     setInvite: inviteCode => dispatch(actions.setInviteCode(inviteCode)),
     getInvites: participantId => dispatch(actions.fetchInvites(participantId)),
-    inviteId: id => dispatch(actions.setInviteId(id))
+    inviteId: id => dispatch(actions.setInviteId(id)),
+    setTimer: time => dispatch(actions.setTimer(time))
   };
 }
 

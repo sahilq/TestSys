@@ -162,3 +162,9 @@ export const fetchScores = payload => ({
   type: types.FETCH_SCORES,
   payload
 });
+
+//Set timer
+export const setTimer = payload => ({
+  type: types.SET_TIMER,
+  payload
+});

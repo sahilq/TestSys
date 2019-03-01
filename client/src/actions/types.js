@@ -41,3 +41,5 @@ export const CURRENT_INVITE_ID = "CURRENT_INVITE_ID";
 export const SAVE_SCORE = "SAVE_SCORE";
 export const FETCH_SCORES = "FETCH_SCORES";
 export const FETCH_SCORES_SUCCESS = "FETCH_SCORES_SUCCESS";
+
+export const SET_TIMER = "SET_TIMER";
