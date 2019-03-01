@@ -88,7 +88,7 @@ class TestMain extends Component {
           <h3>{description}</h3>
           <Timer time={this.props.time} endTest={this.testCompleted} />
         </div>
-        {!this.state.isCompleted && questions[this.state.qn] ? (
+        {questions && !this.state.isCompleted && questions[this.state.qn] ? (
           <div>
             <QueAttempt
               question={questions[this.state.qn]}
