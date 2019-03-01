@@ -17,9 +17,6 @@ module.exports = {
     res.json(newTest).status(201);
   },
   gettest: async (req, res, next) => {
-    if (req.user.role !== "recruiter") {
-      return res.send(403);
-    }
     const test = await Test.findById(req.params._id);
 
     res.json(test).status(200);
