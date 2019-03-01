@@ -2,6 +2,9 @@ const Test = require("../models/test");
 const Question = require("../models/question");
 module.exports = {
   addTest: async (req, res, next) => {
+    if (req.user.role !== "recruiter") {
+      return res.send(403);
+    }
     const { userId, testName, description } = req.body;
     const newTest = new Test({ userId, testName, description });
     const questions = req.body.questions;
@@ -14,11 +17,17 @@ module.exports = {
     res.json(newTest).status(201);
   },
   gettest: async (req, res, next) => {
+    if (req.user.role !== "recruiter") {
+      return res.send(403);
+    }
     const test = await Test.findById(req.params._id);
 
     res.json(test).status(200);
   },
   getall: async (req, res, next) => {
+    if (req.user.role !== "recruiter") {
+      return res.send(403);
+    }
     try {
       const tests = await Test.find(req.params);
       res.json(tests).status(200);
@@ -27,16 +36,25 @@ module.exports = {
     }
   },
   deleteTest: async (req, res, next) => {
+    if (req.user.role !== "recruiter") {
+      return res.send(403);
+    }
     const test = await Test.findByIdAndDelete(req.params._id);
     res.json(test).status(200);
   },
   infoEdit: async (req, res, next) => {
+    if (req.user.role !== "recruiter") {
+      return res.send(403);
+    }
     const test = await Test.findOneAndUpdate(req.params._id, req.body, {
       new: true
     });
     res.status(200).json(test);
   },
   addQue: async (req, res, next) => {
+    if (req.user.role !== "recruiter") {
+      return res.send(403);
+    }
     let test = await Test.findById(req.params._id);
 
     let question = new Question(req.body);
@@ -45,6 +63,9 @@ module.exports = {
     res.json(test).status(201);
   },
   delQue: async (req, res, next) => {
+    if (req.user.role !== "recruiter") {
+      return res.send(403);
+    }
     const test = await Test.findById(req.params._id);
 
     test.questions.filter(que => {
@@ -57,6 +78,9 @@ module.exports = {
     res.status(200).json(test);
   },
   editQue: async (req, res, next) => {
+    if (req.user.role !== "recruiter") {
+      return res.send(403);
+    }
     const test = await Test.findById(req.params._id);
     let newQue = new Question(req.body.question);
     test.questions.filter(que => {
