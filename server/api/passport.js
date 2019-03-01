@@ -21,6 +21,7 @@ passport.use(
       secretOrKey: JWT_SECRET
     },
     async (payload, done) => {
+      console.log(payload);
       try {
         // finding the user by user_id saved in token
         const user = await User.findById(payload.sub);

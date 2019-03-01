@@ -4,7 +4,7 @@ const router = require("express-promise-router")();
 const passport = require("passport");
 
 //require passport configuration
-require("../passportConf");
+require("../passport");
 
 //require validation middleware files
 const { validateBody, schemas } = require("../helper/routeHelpers");

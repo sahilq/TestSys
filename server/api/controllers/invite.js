@@ -11,7 +11,7 @@ signtoken = id => {
       iat: new Date().getTime(),
       iss: 18
     },
-    "INVITE_CODE_SECRET"
+    "1234567890"
   );
 };
 
