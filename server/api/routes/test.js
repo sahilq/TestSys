@@ -1,21 +1,25 @@
 //require libraries
 const express = require("express");
 const router = require("express-promise-router")();
+const passport = require("passport");
+require("../passport");
 
 const Test = require("../controllers/test");
 
-router.route("/gettests/:userId").get(Test.getall);
+const passportJWT = passport.authenticate("jwt", { session: false });
 
-router.route("/addtest").post(Test.addTest);
+router.route("/gettests/:userId").get(passportJWT, Test.getall);
 
-router.route("/deletetest/:_id").delete(Test.deleteTest);
+router.route("/addtest").post(passportJWT, Test.addTest);
 
-router.route("/gettest/:_id").get(Test.gettest);
-router.route("/gettest/:_id").patch(Test.infoEdit);
+router.route("/deletetest/:_id").delete(passportJWT, Test.deleteTest);
 
-router.route("/addque/:_id").patch(Test.addQue);
+router.route("/gettest/:_id").get(passportJWT, Test.gettest);
+router.route("/gettest/:_id").patch(passportJWT, Test.infoEdit);
 
-router.route("/deleteque/:_id").patch(Test.delQue);
-router.route("/editque/:_id").patch(Test.editQue);
+router.route("/addque/:_id").patch(passportJWT, Test.addQue);
+
+router.route("/deleteque/:_id").patch(passportJWT, Test.delQue);
+router.route("/editque/:_id").patch(passportJWT, Test.editQue);
 
 module.exports = router;
