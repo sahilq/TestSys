@@ -1,6 +1,7 @@
-const Test = require("../models/test");
-const Question = require("../models/question");
+const Test = require("../models/test"); //Test schema
+const Question = require("../models/question"); //question schema
 module.exports = {
+  //function to add test
   addTest: async (req, res, next) => {
     if (req.user.role !== "recruiter") {
       return res.send(403);
@@ -16,11 +17,13 @@ module.exports = {
     await newTest.save();
     res.json(newTest).status(201);
   },
+  //get test can be accessed by both recruiter and participants
   gettest: async (req, res, next) => {
     const test = await Test.findById(req.params._id);
 
     res.json(test).status(200);
   },
+  //fetch all tests only recruiter access
   getall: async (req, res, next) => {
     if (req.user.role !== "recruiter") {
       return res.send(403);
@@ -32,6 +35,7 @@ module.exports = {
       res.json({ message: "Cast Error" }).status(300);
     }
   },
+  //only recruiter can delete tests else send 403 forbidden
   deleteTest: async (req, res, next) => {
     if (req.user.role !== "recruiter") {
       return res.send(403);
@@ -39,6 +43,8 @@ module.exports = {
     const test = await Test.findByIdAndDelete(req.params._id);
     res.json(test).status(200);
   },
+  //only recruiter can edit tests else send 403 forbidden
+
   infoEdit: async (req, res, next) => {
     if (req.user.role !== "recruiter") {
       return res.send(403);
@@ -48,6 +54,8 @@ module.exports = {
     });
     res.status(200).json(test);
   },
+  //only recruiter can add que else send 403 forbidden
+
   addQue: async (req, res, next) => {
     if (req.user.role !== "recruiter") {
       return res.send(403);
@@ -59,6 +67,8 @@ module.exports = {
     await test.save();
     res.json(test).status(201);
   },
+  //only recruiter can del que else send 403 forbidden
+
   delQue: async (req, res, next) => {
     if (req.user.role !== "recruiter") {
       return res.send(403);
@@ -74,6 +84,8 @@ module.exports = {
 
     res.status(200).json(test);
   },
+  //only recruiter can edit que else send 403 forbidden
+
   editQue: async (req, res, next) => {
     if (req.user.role !== "recruiter") {
       return res.send(403);
