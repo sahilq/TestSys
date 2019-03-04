@@ -28,7 +28,7 @@ class TestShow extends Component {
         <div className="row">
           <div className="col">
             <h3>
-              <i className="text-muted">Welcome</i>
+              <i className="text-muted mr-3">Welcome</i>
               <small>{this.props.userName}</small>
             </h3>
             <div>
