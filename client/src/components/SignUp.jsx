@@ -12,10 +12,8 @@ class SignUp extends Component {
   };
   handleSubmit = event => {
     event.preventDefault();
-    const data = this.state;
-    this.props.signUp(data);
+    this.props.signUp(this.state);
     this.setState({ email: "", password: "", name: "", role: "" });
-    this.props.history.push("/signup");
   };
 
   render() {
@@ -103,7 +101,8 @@ class SignUp extends Component {
 
 function mapStateToProps(state) {
   return {
-    errorMessage: state.auth.regErrorMessage
+    errorMessage: state.auth.regErrorMessage,
+    isAuth: state.auth.isAuthenticated
   };
 }
 function mapDispatchToProps(dispatch) {
