@@ -5,7 +5,7 @@ const initialState = {
   token: "",
   regErrorMessage: "",
   logErrorMessage: "",
-
+  role: "",
   userId: "",
   userName: "",
   participants: []
@@ -55,9 +55,13 @@ export default (state = initialState, action) => {
       return {
         ...state,
         isAuthenticated: false,
-        errorMessage: "",
         token: null,
-        userId: ""
+        regErrorMessage: "",
+        logErrorMessage: "",
+        role: "",
+        userId: "",
+        userName: "",
+        participants: []
       };
     case types.GET_PARTICIPANTS_SUCCESS:
       return {
