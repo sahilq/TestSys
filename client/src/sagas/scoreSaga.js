@@ -1,7 +1,6 @@
-import { call, put } from "redux-saga/effects";
+import { put } from "redux-saga/effects";
 import axios from "axios";
 
-import * as actions from "../actions/actionCreators";
 import * as types from "../actions/types";
 
 const scoreUri = "http://localhost:5000/score";
