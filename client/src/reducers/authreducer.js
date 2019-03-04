@@ -20,7 +20,8 @@ export default (state = initialState, action) => {
         errorMessage: "",
         token: action.payload.token,
         userId: action.payload.user.id,
-        userName: action.payload.user.name
+        userName: action.payload.user.name,
+        role: action.payload.user.role
       };
     case types.SIGN_IN_SUCCESS:
       return {
