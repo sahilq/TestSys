@@ -5,13 +5,11 @@ const scoreSchema = new Schema({
   participantId: {
     type: mongoose.Schema.Types.ObjectId,
     required: true,
-    ref: "users"
+    ref: "user"
   },
-  userName: { type: String, required: true },
-  testName: { type: String, required: true },
   score: { type: Number, required: true },
   total: { type: Number, required: true },
-  testId: { type: mongoose.Schema.Types.ObjectId, required: true, ref: "tests" }
+  testId: { type: mongoose.Schema.Types.ObjectId, required: true, ref: "test" }
 });
 
 const Score = mongoose.model("score", scoreSchema);

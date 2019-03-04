@@ -20,8 +20,8 @@ class MarksList extends Component {
               <tbody>
                 {this.props.scoresList.map(score => (
                   <tr className="row border-bottom" key={score._id}>
-                    <td className="col d-block">{score.testName}</td>
-                    <td className="col d-block">{score.userName}</td>
+                    <td className="col d-block">{score.testId.testName}</td>
+                    <td className="col d-block">{score.participantId.email}</td>
                     <td className="col d-block">{score.score}</td>
 
                     <td className="col d-block">{score.total}</td>
