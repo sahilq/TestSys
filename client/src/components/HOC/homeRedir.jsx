@@ -5,10 +5,10 @@ export default OriginalComponent => {
   class MixedComponent extends Component {
     checkAuth() {
       if (this.props.isAuth) {
-        if (this.props.role === "recruiter") {
-          return this.props.history.push("/testshow");
-        } else if (this.props.role === "participant") {
+        if (this.props.role !== "recruiter") {
           return this.props.history.push("/pdashboard");
+        } else if (this.props.role !== "participant") {
+          return this.props.history.push("/testshow");
         }
       }
     }
