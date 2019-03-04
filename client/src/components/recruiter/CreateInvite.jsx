@@ -38,6 +38,7 @@ class CreateInvite extends Component {
 
   handleTime = e => {
     let time = e.target.value;
+    //convert to hh:mm:ss[*]
     let p = time.split(":");
     time = +p[0] * 60 * 60 + +p[1] * 60;
     this.setState({ time: time, isTime: true });
