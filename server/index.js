@@ -1,31 +1,16 @@
 const express = require("express");
-const mongoose = require("mongoose");
-const morgan = require("morgan");
-const cors = require("cors");
-//using mongoose for database connection
-mongoose.connect("mongodb://localhost/TestSys", {
-  useNewUrlParser: true
-});
-const db = mongoose.connection;
-db.on("error", console.error.bind(console, "error connection"));
-db.once("open", () => {
-  console.log("DB CONNECTED");
-});
 
-const app = express(); //init express as app
+//database connection
+require("./startup/db")();
+
+//init express as app
+const app = express();
+
 //Middlewares
-app.use(cors());
-if (app.get("env") === "development") {
-  console.log(`Morgan enabled`);
-  app.use(morgan("dev")); //logger
-}
-app.use(express.json()); //body parser
+require("./startup/middlewares")(app);
 
-//Handling Routes
-app.use("/user", require("./api/routes/users"));
-app.use("/test", require("./api/routes/test"));
-app.use("/invite", require("./api/routes/invite"));
-app.use("/score", require("./api/routes/score"));
+//handling routes
+require("./startup/routes")(app);
 
 //setting port
 const port = process.env.PORT || 5000;
