@@ -6,7 +6,7 @@ export default OriginalComponent => {
     checkAuth() {
       if (this.props.role !== "recruiter") {
         return this.props.history.push("/");
-      } else if (this.props.testActive) {
+      } else if (this.props.role === "recruiter" && this.props.testActive) {
         return this.props.history.push({
           pathname: "/testinfo",
 
