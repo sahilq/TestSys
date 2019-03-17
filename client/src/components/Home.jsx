@@ -12,7 +12,7 @@ class Home extends Component {
       <div className="container m-auto">
         <div className="row m-auto">
           <div className="col m-auto">
-            <h2 className="m-5 p-5">Login To Continue</h2>
+            <h2 className="m-5 p-5">Home Page To BE Created Here[x]</h2>
           </div>
         </div>
       </div>
