@@ -36,11 +36,11 @@ class TestMain extends Component {
     this.inviteCodeVerify(nextProps.inviteCode);
     this.setState({
       total: nextProps.test.questions.length,
-      length: nextProps.test.questions.length
+      length: nextProps.test.questions.length - 1
     });
   };
   submitAnswer = isCorrect => {
-    if (this.state.length >= 0) {
+    if (this.state.length > 0) {
       if (!isCorrect) {
         this.setState({ length: this.state.length - 1, qn: this.state.qn + 1 });
       } else {
@@ -52,7 +52,7 @@ class TestMain extends Component {
       }
     } else {
       this.setState({ isCompleted: true });
-      if (this.state.qn !== 0 && this.state.qn === this.state.total) {
+      if (this.state.qn !== 0 && this.state.qn === this.state.total - 1) {
         this.testCompleted();
       }
     }
@@ -85,9 +85,14 @@ class TestMain extends Component {
         </h1>
         <div>
           <h3>{description}</h3>
-          <Timer time={this.props.time} endTest={this.testCompleted} />
+          {!this.state.isCompleted ? (
+            <Timer time={this.props.time} endTest={this.testCompleted} />
+          ) : null}
         </div>
-        {questions && !this.state.isCompleted && questions[this.state.qn] ? (
+        {questions &&
+        !this.state.isCompleted &&
+        questions[this.state.qn] &&
+        !this.state.isCompleted ? (
           <div>
             <QueAttempt
               question={questions[this.state.qn]}
