@@ -11,7 +11,7 @@ module.exports = {
       total
     });
     savedScore.save();
-    await Invite.findByIdAndRemove(req.body.inviteId);
+    await Invite.findByIdAndRemove(req.body.inviteId); //Deleting invite
     res.json(savedScore).status(201);
   },
   getAllScores: async (req, res, next) => {
