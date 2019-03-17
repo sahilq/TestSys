@@ -4,6 +4,7 @@
 
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import PropTypes from "prop-types";
 
 class Home extends Component {
   state = {};
@@ -19,6 +20,11 @@ class Home extends Component {
     );
   }
 }
+
+Home.propTypes = {
+  role: PropTypes.string,
+  isAuth: PropTypes.bool
+};
 
 function mapStateTopProps(state) {
   return {
