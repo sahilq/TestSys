@@ -6,7 +6,7 @@ module.exports = function(app) {
   //Middlewares
   app.use(cors());
   if (app.get("env") === "development") {
-    console.log(`Morgan enabled`);
+    console.log(`Development Mode Detected \nMorgan enabled`);
     app.use(morgan("dev")); //logger
   }
   app.use(express.json()); //body parser
