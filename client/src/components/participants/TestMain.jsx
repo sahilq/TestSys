@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import { connect } from "react-redux";
 import jwt_decode from "jwt-decode";
 
@@ -7,7 +7,7 @@ import * as actions from "../../actions/actionCreators";
 import QueAttempt from "./QueAttempt";
 import Timer from "./Timer";
 
-class TestMain extends Component {
+class TestMain extends PureComponent {
   state = {
     qn: 0,
     isCompleted: false,
@@ -31,28 +31,29 @@ class TestMain extends Component {
     }
     this.props.getTest(this.props.match.params.id);
   };
-  //WARNING! To be deprecated in React v17. Use new lifecycle static getDerivedStateFromProps instead.
-  componentWillReceiveProps = nextProps => {
-    this.inviteCodeVerify(nextProps.inviteCode);
-    this.setState({
-      total: nextProps.test.questions.length,
-      length: nextProps.test.questions.length - 1
-    });
+
+  static getDerivedStateFromProps = (nextProps, prevState) => {
+    console.log(nextProps.test);
+    // this.inviteCodeVerify(nextProps.inviteCode);
+    let state = {
+      length: nextProps.test.questions.length,
+      total: nextProps.test.questions.length
+    };
+    return state;
   };
+
   submitAnswer = isCorrect => {
+    this.setState({ length: this.state.length - 1, qn: this.state.qn + 1 });
     if (this.state.length > 0) {
-      if (!isCorrect) {
-        this.setState({ length: this.state.length - 1, qn: this.state.qn + 1 });
-      } else {
+      if (isCorrect) {
         this.setState({
-          score: this.state.score + 1,
-          length: this.state.length - 1,
-          qn: this.state.qn + 1
+          score: this.state.score + 1
         });
       }
     } else {
-      this.setState({ isCompleted: true });
+      console.log("Till here");
       if (this.state.qn !== 0 && this.state.qn === this.state.total - 1) {
+        this.setState({ isCompleted: true });
         this.testCompleted();
       }
     }
@@ -71,13 +72,13 @@ class TestMain extends Component {
       participantId,
       testId
     };
-    this.props.saveScore(data);
+    // this.props.saveScore(data);
+    console.log("props.saveScore()", this.state.score);
     this.setState({ isCompleted: true });
   };
 
   render() {
     const { testName, description, questions } = this.props.test;
-
     return (
       <div>
         <h1>
@@ -85,15 +86,10 @@ class TestMain extends Component {
         </h1>
         <div>
           <h3>{description}</h3>
-          {!this.state.isCompleted ? (
-            <Timer time={this.props.time} endTest={this.testCompleted} />
-          ) : null}
         </div>
-        {questions &&
-        !this.state.isCompleted &&
-        questions[this.state.qn] &&
-        !this.state.isCompleted ? (
+        {questions && !this.state.isCompleted && questions[this.state.qn] ? (
           <div>
+            <Timer time={this.props.time} endTest={this.testCompleted} />
             <QueAttempt
               question={questions[this.state.qn]}
               submitAnswer={this.submitAnswer}
@@ -112,6 +108,7 @@ class TestMain extends Component {
     );
   }
 }
+
 function mapStateToProps(state) {
   return {
     isAutn: state.auth.isAuthenticated,
@@ -126,6 +123,7 @@ function mapStateToProps(state) {
     time: state.invite.time
   };
 }
+
 function mapDispatchToProps(dispatch) {
   return {
     getTest: id => dispatch(actions.getTest(id)),
