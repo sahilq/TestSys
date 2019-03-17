@@ -4,4 +4,4 @@
   npm run client<br>
   npm run dev<br>
 
-This Project is in Development like all everything  else. (o_o)
+This Project is in Development like everything  else. (o_o)
