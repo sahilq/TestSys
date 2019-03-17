@@ -1,7 +1,7 @@
 # TestSys
 Available Scripts :
-  npm run server\n
-  npm run client\n
-  npm run dev\n
+  npm run server
+  npm run client
+  npm run dev
 
 This Project is in Development like all everything  else. (o_o)
