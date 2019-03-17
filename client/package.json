@@ -8,6 +8,7 @@
     "hh-mm-ss": "^1.2.0",
     "jwt-decode": "^2.2.0",
     "pretty-ms": "^4.0.0",
+    "prop-types": "^15.7.2",
     "react": "^16.8.2",
     "react-cookies": "^0.1.0",
     "react-dom": "^16.8.2",
