@@ -1,3 +1,7 @@
+/////////////////////////
+// TO BE CREATED HOME PAGE[x]
+/////////////////////////
+
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
