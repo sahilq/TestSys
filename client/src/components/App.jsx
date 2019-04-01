@@ -12,7 +12,7 @@ class App extends Component {
         {/* render navBar */}
         <Header />
         {/* render components */}
-        <div className="container">{this.props.children}</div>
+        {this.props.children}
       </div>
     );
   }

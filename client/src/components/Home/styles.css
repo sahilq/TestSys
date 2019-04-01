@@ -1,0 +1,12 @@
+#imgDiv {
+  background-image: url("../images/home.jpg");
+  width: 100%;
+  height: 600px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  margin-top: -5px;
+}
+
+#contentDiv {
+  padding-top: 400px;
+}

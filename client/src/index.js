@@ -9,7 +9,7 @@ import axios from "axios";
 import store from "./store/index";
 //components
 import App from "./components/App";
-import Home from "./components/Home";
+import Home from "./components/Home/index";
 import SignIn from "./components/SignIn";
 import SignUp from "./components/SignUp";
 import TestInit from "./components/recruiter/TestInit";
