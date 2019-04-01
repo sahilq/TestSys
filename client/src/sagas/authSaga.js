@@ -36,7 +36,6 @@ export function* signUp(action) {
 
 //Sign In
 export function* signIn(action) {
-  console.log("auth sign in ", action.payload);
   try {
     const res = yield call(axios.post, userUri + "/signin", action.payload);
     yield call(svAuthInfo, res.data);

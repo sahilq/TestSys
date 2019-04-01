@@ -10,7 +10,6 @@ class Header extends Component {
     this.signOut = this.signOut.bind(this);
   }
   async signOut() {
-    console.log("Sign Out called");
     await this.props.signOut();
   }
   render() {

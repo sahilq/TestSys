@@ -18,12 +18,10 @@ const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 //fetch token and users details from local storage
 const jwtToken = localStorage.getItem("JWT_TOKEN");
 let user = localStorage.getItem("USER");
-console.log(user ? "Logged In" : "Not Logged In");
 
 if (user) {
   //check if session exists
   user = user.split('"'); //spliting user-object-stringfied string stored in localstorage by(")
-  console.log("checking value.......", user); //cheacking user array elements
 }
 
 //set headers
