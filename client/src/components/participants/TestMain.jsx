@@ -32,30 +32,21 @@ class TestMain extends PureComponent {
     this.props.getTest(this.props.match.params.id);
   };
 
-  static getDerivedStateFromProps = (nextProps, prevState) => {
-    console.log(nextProps.test);
-    // this.inviteCodeVerify(nextProps.inviteCode);
-    let state = {
-      length: nextProps.test.questions.length,
-      total: nextProps.test.questions.length
-    };
-    return state;
-  };
-
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (prevState.total === 0 && nextProps.test && nextProps.test.questions) {
+      // this.inviteCodeVerify(nextProps.inviteCode);
+      return {
+        total: nextProps.test.questions.length,
+        length: nextProps.test.questions.length
+      };
+    } else {
+      return null;
+    }
+  }
   submitAnswer = isCorrect => {
     this.setState({ length: this.state.length - 1, qn: this.state.qn + 1 });
-    if (this.state.length > 0) {
-      if (isCorrect) {
-        this.setState({
-          score: this.state.score + 1
-        });
-      }
-    } else {
-      console.log("Till here");
-      if (this.state.qn !== 0 && this.state.qn === this.state.total - 1) {
-        this.setState({ isCompleted: true });
-        this.testCompleted();
-      }
+    if (isCorrect) {
+      this.setState({ score: this.state.score + 1 });
     }
   };
 
@@ -72,15 +63,25 @@ class TestMain extends PureComponent {
       participantId,
       testId
     };
-    // this.props.saveScore(data);
-    console.log("props.saveScore()", this.state.score);
+    this.props.saveScore(data);
     this.setState({ isCompleted: true });
   };
 
+  componentDidUpdate(prevProps, prevState) {
+    if (
+      this.state.qn === this.state.total &&
+      this.state.qn > 0 &&
+      !this.state.isCompleted
+    ) {
+      this.testCompleted();
+    }
+  }
+
   render() {
     const { testName, description, questions } = this.props.test;
+
     return (
-      <div>
+      <div className="container-fluid">
         <h1>
           Welcome To Test <small>{testName}</small>
         </h1>
@@ -108,7 +109,6 @@ class TestMain extends PureComponent {
     );
   }
 }
-
 function mapStateToProps(state) {
   return {
     isAutn: state.auth.isAuthenticated,
@@ -123,7 +123,6 @@ function mapStateToProps(state) {
     time: state.invite.time
   };
 }
-
 function mapDispatchToProps(dispatch) {
   return {
     getTest: id => dispatch(actions.getTest(id)),
